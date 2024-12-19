@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./styles/hamburgers.min.css";
 import "./styles/Navbar.css";
+import { Link } from "react-router-dom";
+import { auth } from "./db";
 export default function Navbar() {
     const [active, setActive] = useState(false);
     return (
@@ -8,27 +10,36 @@ export default function Navbar() {
             <a className="navbar-brand px-2" href="#">
                 6D
             </a>
-            <button
-                className={` hamburger hamburger--spin ${
-                    active ? "is-active" : ""
-                }`}
-                // className="navbar-toggler my-2"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-                onClick={() => {
-                    setActive(!active);
-                }}
-            >
-                <span className="hamburger-box">
-                    <span className="hamburger-inner"></span>
-                </span>
-                {/* <span className="navbar-toggler-icon"></span> */}
-            </button>
-
+            <span>
+                {!auth.currentUser ? (
+                    <Link
+                        to="/login"
+                        className="text-white text-decoration-none"
+                    >
+                        Anmelden
+                    </Link>
+                ) : (
+                    ""
+                )}
+                <button
+                    className={` hamburger hamburger--spin ${
+                        active ? "is-active" : ""
+                    }`}
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                    onClick={() => {
+                        setActive(!active);
+                    }}
+                >
+                    <span className="hamburger-box">
+                        <span className="hamburger-inner"></span>
+                    </span>
+                </button>
+            </span>
             <div
                 className="collapse navbar-collapse border-top border-1 border-dark"
                 id="navbarSupportedContent"

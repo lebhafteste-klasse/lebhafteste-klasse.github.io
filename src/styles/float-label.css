@@ -1,0 +1,30 @@
+.input-field {
+    position: relative;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.input-field label {
+    position: absolute;
+    top: 50%;
+    left: 2%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: 0.3s;
+    z-index: 200000;
+}
+
+.input-field input:focus ~ label {
+    top: 0;
+    font-size: small;
+    padding: 0 5px;
+    background-color: inherit;
+    backdrop-filter: blur(20px);
+}
+.input-field input:required:valid ~ label,
+.input-field input.float-label-active ~ label {
+    top: 0;
+    font-size: small;
+    padding: 0 5px;
+    backdrop-filter: blur(10px);
+}
