@@ -1,8 +1,11 @@
 import { auth } from "./db";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+    signInWithEmailAndPassword,
+    setPersistence,
+    browserLocalPersistence,
+} from "firebase/auth";
 import "./styles/float-label.css";
 import { useState } from "react";
-import { redirect } from "react-router-dom";
 
 export default function Login() {
     const [hasError, setHasError] = useState(false);
@@ -12,17 +15,21 @@ export default function Login() {
             <form
                 action={
                     /** @param {FormData} formData*/ (formData) => {
-                        signInWithEmailAndPassword(
-                            auth,
-                            formData.get("email"),
-                            formData.get("pwd")
-                        )
-                            .catch((err) => {
-                                setHasError(true);
-                            })
-                            .then((v) => {
-                                redirect("/");
-                            });
+                        setPersistence(auth, browserLocalPersistence).then(
+                            () => {
+                                signInWithEmailAndPassword(
+                                    auth,
+                                    formData.get("email"),
+                                    formData.get("pwd")
+                                )
+                                    .catch((err) => {
+                                        setHasError(true);
+                                    })
+                                    .then((v) => {
+                                        window.location.hash = "#";
+                                    });
+                            }
+                        );
                     }
                 }
                 className="w-50 h-75 border border-1 rounded rounded-3 border-success text-center"
@@ -52,7 +59,7 @@ export default function Login() {
                         autoFocus
                     />
                     <label id="uname-label" htmlFor="uname">
-                        E-Mail Addresse (@stiftsgymnasium.de)
+                        E-Mail Addresse
                     </label>
                 </div>
 

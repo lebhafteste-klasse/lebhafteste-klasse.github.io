@@ -4,6 +4,7 @@ import db from "./db";
 import { ref, onValue } from "firebase/database";
 import { useState, useEffect } from "react";
 import Login from "./Login";
+import { ThemeContext } from "./context";
 const Index = function () {
     const [data, setData] = useState([]);
 
@@ -17,9 +18,7 @@ const Index = function () {
         const fetchData = () => {
             // Listen for changes in the collection
             onValue(collectionRef, (snapshot) => {
-                snapshot.toJSON();
                 const dataItem = snapshot.val();
-                console.log(snapshot.toJSON());
 
                 // Check if dataItem exists
                 if (dataItem) {
@@ -53,19 +52,24 @@ const Index = function () {
 const TestPage = function () {
     return <h1>Test</h1>;
 };
+
 function App() {
     return (
-        <HashRouter>
-            <Routes>
-                <Route path="/" element={<Wrapper component={<Index />} />} />
-                <Route path="/test" element={<TestPage />} />
-                <Route
-                    path="/login"
-                    element={<Wrapper component={<Login />} />}
-                />
-            </Routes>
-        </HashRouter>
+        <ThemeContext.Provider value={localStorage.getItem("theme") || "light"}>
+            <HashRouter>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={<Wrapper component={<Index />} />}
+                    />
+                    <Route path="/test" element={<TestPage />} />
+                    <Route
+                        path="/login"
+                        element={<Wrapper component={<Login />} />}
+                    />
+                </Routes>
+            </HashRouter>
+        </ThemeContext.Provider>
     );
 }
-
 export default App;
