@@ -32,7 +32,14 @@ export default function Navbar() {
                         Anmelden
                     </Link>
                 ) : (
-                    ""
+                    <span className="text-white">
+                        {auth.currentUser.email
+                            .split(".")[0]
+                            .replace(
+                                auth.currentUser.email[0],
+                                auth.currentUser.email[0].toUpperCase()
+                            )}
+                    </span>
                 )}
                 <button
                     className="p-2 d-inline border border-0 bg-transparent"

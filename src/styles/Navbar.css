@@ -25,3 +25,13 @@
         background-color: white !important;
     }
 }
+#image {
+    text-align: center;
+    width: 90%;
+    background: url("lama.jpg"), url("lama-small.jpg");
+    background-size: cover;
+    min-height: 500px;
+    font-size: xx-large;
+    color: white;
+    font-family: "Dancing Script";
+}

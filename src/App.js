@@ -34,19 +34,17 @@ const Index = function () {
     }, []);
 
     return (
-        <div>
-            <h1>Data from database:</h1>
-            <ul>
-                {data.map((item, index) => (
-                    <li key={index}>
-                        Am {new Date(item.posted_at).toTimeString()}
-                        <div
-                            dangerouslySetInnerHTML={{ __html: item.content }}
-                        ></div>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <main>
+            <div
+                id="image"
+                class="d-flex px-3 flex-column justify-content-center align-items-center"
+            >
+                Die lebhafteste Klasse am Stifts.
+                <div class="text-center">
+                    <b>6D</b>
+                </div>
+            </div>
+        </main>
     );
 };
 const TestPage = function () {
