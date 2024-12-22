@@ -1,9 +1,10 @@
 import { Routes, Route, HashRouter } from "react-router-dom";
 import Wrapper from "./Wrapper";
-import Login from "./Login";
+import Login from "./pages/Login";
 import { ThemeContext } from "./context";
-import Index from "./Home";
-import News from "./News";
+import Index from "./pages/Home";
+import News from "./pages/News";
+import NewsDetail from "./pages/NewsDetail";
 
 const TestPage = function () {
     return <h1>Test</h1>;
@@ -23,7 +24,14 @@ function App() {
                         path="/login"
                         element={<Wrapper component={<Login />} />}
                     />
-                    <Route path="/news" element={<News />} />
+                    <Route
+                        path="/news"
+                        element={<Wrapper component={<News />} />}
+                    />
+                    <Route
+                        path="/news/:id"
+                        element={<Wrapper component={<NewsDetail />} />}
+                    />
                 </Routes>
             </HashRouter>
         </ThemeContext.Provider>
