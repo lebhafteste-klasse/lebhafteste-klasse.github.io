@@ -10,14 +10,14 @@ const Index = function () {
         <main>
             <div
                 id="image"
-                class="d-flex m-5 px-3 flex-column justify-content-center align-items-center"
+                className="d-flex m-5 px-3 flex-column justify-content-center align-items-center"
             >
                 Die lebhafteste Klasse am Stifts.
-                <div class="text-center">
+                <div className="text-center">
                     <b>6D</b>
                 </div>
             </div>
-            <div data-aos="fade-right" class="container">
+            <div data-aos="fade-right" className="container">
                 <h2>Unsere Neuigkeiten:</h2>
                 <div>
                     <News />

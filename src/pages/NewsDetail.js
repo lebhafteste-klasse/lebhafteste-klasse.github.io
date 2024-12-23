@@ -21,7 +21,7 @@ export default function NewsDetail() {
     return (
         <div>
             <div className="fw-bolder">
-                <Link to={"/news"}>← Zurück</Link>
+                <Link to={"/"}>← Zurück</Link>
             </div>
             <h1>{news.name}</h1>
             <div dangerouslySetInnerHTML={{ __html: news.content }}></div>

@@ -3,7 +3,6 @@ import Wrapper from "./Wrapper";
 import Login from "./pages/Login";
 import { ThemeContext } from "./context";
 import Index from "./pages/Home";
-import News from "./pages/News";
 import NewsDetail from "./pages/NewsDetail";
 
 const TestPage = function () {

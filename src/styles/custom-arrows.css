@@ -4,6 +4,7 @@
     left: -35px;
     transform: translateY(-50%);
     z-index: 1;
+    border-radius: 50%;
 }
 
 .custom-next-arrow {
@@ -12,4 +13,5 @@
     right: -35px;
     transform: translateY(-50%);
     z-index: 1;
+    border-radius: 50%;
 }
