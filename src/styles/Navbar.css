@@ -28,10 +28,15 @@
 #image {
     text-align: center;
     width: 90%;
-    background: url("lama.webp"), url("lama-small.webp");
+    background: url("lama.webp");
     background-size: cover;
     min-height: 500px;
     font-size: xx-large;
     color: white;
     font-family: "Dancing Script";
+    @media screen and (max-width: 768px) {
+        background: url("lama-small.webp");
+        background-position: right;
+        background-repeat: no-repeat;
+    }
 }
