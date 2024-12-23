@@ -28,7 +28,7 @@
 #image {
     text-align: center;
     width: 90%;
-    background: url("lama.jpg"), url("lama-small.jpg");
+    background: url("lama.webp"), url("lama-small.webp");
     background-size: cover;
     min-height: 500px;
     font-size: xx-large;

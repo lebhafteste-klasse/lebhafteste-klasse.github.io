@@ -1,10 +1,10 @@
-import AOS from "aos";
-import "aos/dist/aos.css";
+// import AOS from "aos";
+// import "aos/dist/aos.css";
 import News from "../pages/News";
 // filepath: /c:/Users/Huawei/Desktop/Артём/Klassenwebsite/project/src/index.js
 
 const Index = function () {
-    AOS.init();
+    // AOS.init();
 
     return (
         <main>

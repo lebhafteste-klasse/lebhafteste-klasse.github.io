@@ -44,14 +44,21 @@ export default function Navbar() {
                 <button
                     className="p-2 d-inline border border-0 bg-transparent"
                     onClick={() => {
-                        localStorage.setItem(
-                            "theme",
-                            theme == "light" ? "dark" : "light"
+                        setTheme(
+                            localStorage.getItem("theme") == "light"
+                                ? "dark"
+                                : "light"
                         );
-                        setTheme(localStorage.getItem("theme"));
                     }}
+                    aria-label="Theme umschalten"
                 >
-                    <img src={`/${theme}-theme.svg`} className="d-inline" />
+                    <img
+                        src={`/${theme}-theme.svg`}
+                        className="d-inline"
+                        alt={`${
+                            localStorage.getItem("theme") == "light"
+                        } theme`}
+                    />
                 </button>
                 <button
                     className={` hamburger hamburger--spin ${
