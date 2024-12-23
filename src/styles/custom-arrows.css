@@ -1,0 +1,15 @@
+.custom-prev-arrow {
+    position: absolute;
+    top: 50%;
+    left: -35px;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.custom-next-arrow {
+    position: absolute;
+    top: 50%;
+    right: -35px;
+    transform: translateY(-50%);
+    z-index: 1;
+}

@@ -25,10 +25,6 @@ function App() {
                         element={<Wrapper component={<Login />} />}
                     />
                     <Route
-                        path="/news"
-                        element={<Wrapper component={<News />} />}
-                    />
-                    <Route
                         path="/news/:id"
                         element={<Wrapper component={<NewsDetail />} />}
                     />
