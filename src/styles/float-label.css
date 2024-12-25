@@ -14,7 +14,8 @@
     z-index: 200000;
 }
 
-.input-field input:focus ~ label {
+.input-field input:focus ~ label,
+.input-field textarea:focus ~ label {
     top: 0;
     font-size: small;
     padding: 0 5px;
@@ -22,7 +23,9 @@
     backdrop-filter: blur(20px);
 }
 .input-field input:required:valid ~ label,
-.input-field input.float-label-active ~ label {
+.input-field input.float-label-active ~ label,
+.input-field textarea:required:valid ~ label,
+.input-field textarea.float-label-active ~ label {
     top: 0;
     font-size: small;
     padding: 0 5px;

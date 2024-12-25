@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { auth } from "./db";
 import { onAuthStateChanged } from "firebase/auth";
 import { useCurrentTheme } from "./context";
+import nameFromEMail from "./nameFromEMail";
 export default function Navbar() {
     const [active, setActive] = useState(false);
     const [theme, setTheme] = useCurrentTheme();
@@ -33,12 +34,7 @@ export default function Navbar() {
                     </Link>
                 ) : (
                     <span className="text-white">
-                        {auth.currentUser.email
-                            .split(".")[0]
-                            .replace(
-                                auth.currentUser.email[0],
-                                auth.currentUser.email[0].toUpperCase()
-                            )}
+                        {nameFromEMail(auth.currentUser.email)}
                     </span>
                 )}
                 <button
@@ -86,14 +82,9 @@ export default function Navbar() {
             >
                 <ul className="navbar-nav mr-auto px-2">
                     <li className="nav-item">
-                        <a href="#" className="nav-link">
-                            News
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a href="#" className="nav-link">
+                        <Link to={"/witzeseite"} className="nav-link">
                             Witzeseite
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>

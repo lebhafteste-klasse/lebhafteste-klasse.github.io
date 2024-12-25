@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import { ThemeContext } from "./context";
 import Index from "./pages/Home";
 import NewsDetail from "./pages/NewsDetail";
+import Jokes from "./pages/Jokes";
 
 const TestPage = function () {
     return <h1>Test</h1>;
@@ -26,6 +27,10 @@ function App() {
                     <Route
                         path="/news/:id"
                         element={<Wrapper component={<NewsDetail />} />}
+                    />
+                    <Route
+                        path="/witzeseite"
+                        element={<Wrapper component={<Jokes />} />}
                     />
                 </Routes>
             </HashRouter>
