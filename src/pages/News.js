@@ -78,27 +78,32 @@ const News = () => {
     if (!data) {
         return <Spinner />;
     }
-
+    let html = [];
+    for (let [key, news] of Object.entries(data)) {
+        const date = new Date(news.posted_at);
+        const datestring = `Um ${date.getMinutes()}:${date.getHours()} am ${date.getDate()}.${
+            date.getMonth() + 1
+        }.${date.getFullYear()}`;
+        html.push(
+            <div key={key} className="card border border-1 m-2">
+                <div className="card-body w-75">
+                    <Link to={`/news/${key}`}>
+                        <h3>{news.name}</h3>
+                    </Link>
+                    <p className="fs-6">{datestring}</p>
+                    {/* <p className="fs-6">
+                                    von{" "}
+                                    {news.author !== "Anonym"
+                                        ? nameFromEMail(news.author)
+                                        : "Anonym"}
+                                </p> */}
+                </div>
+            </div>
+        );
+    }
     return (
         <div style={{ width: "80%", margin: "auto" }}>
-            <Slider {...settings}>
-                {data.map((news, index) => {
-                    const date = new Date(news.posted_at);
-                    const datestring = `Um ${date.getMinutes()}:${date.getHours()} am ${date.getDate()}.${
-                        date.getMonth() + 1
-                    }.${date.getFullYear()}`;
-                    return (
-                        <div key={index} className="card border border-1 m-2">
-                            <div className="card-body w-75">
-                                <Link to={`/news/${index}`}>
-                                    <h3>{news.name}</h3>
-                                </Link>
-                                <p className="fs-6">{datestring}</p>
-                            </div>
-                        </div>
-                    );
-                })}
-            </Slider>
+            <Slider {...settings}>{html}</Slider>
         </div>
     );
 };

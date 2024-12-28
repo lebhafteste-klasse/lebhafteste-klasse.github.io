@@ -1,0 +1,12 @@
+.subject-item {
+    flex: 1 1 calc(33.333% - 1rem); /* Adjust the width to one-third minus some margin */
+    margin: 0.5rem; /* Add some margin for spacing */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    min-height: 50px;
+    align-items: center;
+}
+
+.d-flex {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+}

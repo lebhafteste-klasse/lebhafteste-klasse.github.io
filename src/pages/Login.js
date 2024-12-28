@@ -4,7 +4,6 @@ import {
     setPersistence,
     browserLocalPersistence,
 } from "firebase/auth";
-import "../styles/float-label.css";
 import { useState } from "react";
 
 export default function Login() {

@@ -5,3 +5,6 @@ export default function nameFromEMail(email) {
     }
     return name;
 }
+export const beginWithCapital = (str) => {
+    return str[0].toUpperCase() + str.slice(1);
+};
