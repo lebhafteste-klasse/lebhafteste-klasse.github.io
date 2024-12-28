@@ -6,9 +6,9 @@ import CreateJoke from "../components/CreateJoke";
 
 export default function Jokes() {
     const [jokes, setJokes] = useState([]);
-    const jokesRef = ref(db, "jokes");
 
     useEffect(() => {
+        const jokesRef = ref(db, "jokes");
         onValue(jokesRef, (snapshot) => {
             const jokes = snapshot.val();
             const jokesList = [];
