@@ -25,7 +25,7 @@ export default function Login() {
                                         setHasError(true);
                                     })
                                     .then((v) => {
-                                        window.location.hash = "#";
+                                        window.history.back();
                                     });
                             }
                         );
