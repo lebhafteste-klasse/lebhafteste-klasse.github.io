@@ -21,7 +21,7 @@ export default function Navbar() {
         <nav
             className={`navbar border-bottom border-1 border-dark mb-2 ${theme}`}
         >
-            <a className="navbar-brand px-2" href="#">
+            <a className="navbar-brand px-2" href="/">
                 6D
             </a>
             <span>
@@ -41,7 +41,7 @@ export default function Navbar() {
                     className="p-2 d-inline border border-0 bg-transparent"
                     onClick={() => {
                         setTheme(
-                            localStorage.getItem("theme") == "light"
+                            localStorage.getItem("theme") === "light"
                                 ? "dark"
                                 : "light"
                         );
@@ -52,7 +52,7 @@ export default function Navbar() {
                         src={`/${theme}-theme.svg`}
                         className="d-inline"
                         alt={`${
-                            localStorage.getItem("theme") == "light"
+                            localStorage.getItem("theme") === "light"
                         } theme`}
                     />
                 </button>
@@ -84,6 +84,11 @@ export default function Navbar() {
                     <li className="nav-item">
                         <Link to={"/witzeseite"} className="nav-link">
                             Witzeseite
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to={"/fachforen"} className="nav-link">
+                            Forum für jedes Fach
                         </Link>
                     </li>
                 </ul>
