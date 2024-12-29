@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { auth } from "./db";
 import { onAuthStateChanged } from "firebase/auth";
 import { useCurrentTheme } from "./context";
-import nameFromEMail from "./nameFromEMail";
+import nameFromEMail from "./utils";
 export default function Navbar() {
     const [active, setActive] = useState(false);
     const [theme, setTheme] = useCurrentTheme();
@@ -13,7 +13,6 @@ export default function Navbar() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             setAuthenticated(true);
-            console.log(user);
         }
     });
     document.body.setAttribute("data-bs-theme", theme);
@@ -88,7 +87,7 @@ export default function Navbar() {
                     </li>
                     <li className="nav-item">
                         <Link to={"/fachforen"} className="nav-link">
-                            Forum für jedes Fach
+                            Forum + Hausaufgaben für jedes Fach
                         </Link>
                     </li>
                 </ul>

@@ -10,6 +10,7 @@ import SubjectForum from "./pages/SubjectForum";
 import NewForumPost from "./pages/NewForumPost";
 import ForumPost from "./pages/ForumPost";
 import "./styles/float-label.css";
+import Homework from "./pages/Homework";
 
 const TestPage = function () {
     return <h1>Test</h1>;
@@ -52,6 +53,10 @@ function App() {
                     <Route
                         path="forum-post/:subject/:key"
                         element={<Wrapper component={<ForumPost />} />}
+                    />
+                    <Route
+                        path="hausaufgaben/:subject"
+                        element={<Wrapper component={<Homework />} />}
                     />
                 </Routes>
             </HashRouter>

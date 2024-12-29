@@ -57,7 +57,7 @@ export default function SubjectForums() {
                             subject.name
                         ) && (
                             <Link
-                                to={`/homework/${subject.id}`}
+                                to={`/hausaufgaben/${subject.id}`}
                                 className="d-inline"
                             >
                                 Hausaufgaben
