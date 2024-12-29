@@ -6,7 +6,7 @@ export default function Wrapper({
     loggedInOnly = false,
     notLoggedInOnly = false,
 }) {
-    if (loggedInOnly) {
+    if (loggedInOnly && !auth.currentUser) {
         window.location.hash = "/login";
     }
     if (notLoggedInOnly && auth.currentUser) {
