@@ -2,7 +2,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Forum from "../components/Forum";
-import { beginWithCapital } from "../nameFromEMail";
+import { beginWithCapital } from "../utils";
 export default function SubjectForum() {
     // get the subject from the URL parameter
     const { subject } = useParams();

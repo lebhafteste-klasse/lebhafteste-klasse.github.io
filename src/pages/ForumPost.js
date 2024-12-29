@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ref, onValue } from "firebase/database";
 import db from "../db";
-import nameFromEMail from "../nameFromEMail";
+import nameFromEMail from "../utils";
 import Spinner from "react-bootstrap/Spinner";
 
 export default function ForumPost() {

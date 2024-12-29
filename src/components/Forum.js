@@ -3,8 +3,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import db, { auth } from "../db";
-import { onValue, ref, startAt, query, limitToFirst } from "firebase/database";
-import nameFromEMail from "../nameFromEMail";
+import {
+    onValue,
+    ref,
+    startAt,
+    query,
+    limitToFirst,
+    endAt,
+} from "firebase/database";
+import nameFromEMail from "../utils";
 export default function Forum({ subject }) {
     // the list of posts
     const [posts, setPosts] = useState([]);
@@ -14,13 +21,16 @@ export default function Forum({ subject }) {
     useEffect(() => {
         const dbRef = ref(db, `${subject}-posts`);
         if (page !== 1) {
-            onValue(query(dbRef, startAt(page - 1 * 8)), (snapshot) => {
-                const data = snapshot.val();
+            onValue(
+                query(dbRef, startAt(page - 1 * 8), endAt(page * 8)),
+                (snapshot) => {
+                    const data = snapshot.val();
 
-                if (data) {
-                    setPosts(data);
+                    if (data) {
+                        setPosts(data);
+                    }
                 }
-            });
+            );
         } else {
             onValue(query(dbRef, limitToFirst(8)), (snapshot) => {
                 const data = snapshot.val();
@@ -30,7 +40,7 @@ export default function Forum({ subject }) {
                 }
             });
         }
-    }, [subject]);
+    }, [subject, page]);
     const html = [];
     for (let [key, post] of Object.entries(posts)) {
         html.push(

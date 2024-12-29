@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import db, { auth } from "../db";
 import { onValue, ref } from "firebase/database";
-import nameFromEMail from "../nameFromEMail";
+import nameFromEMail from "../utils";
 import CreateJoke from "../components/CreateJoke";
 
 export default function Jokes() {
