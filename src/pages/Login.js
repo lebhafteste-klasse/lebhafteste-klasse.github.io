@@ -5,6 +5,7 @@ import {
     browserLocalPersistence,
 } from "firebase/auth";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Login() {
     const [hasError, setHasError] = useState(false);
@@ -76,6 +77,13 @@ export default function Login() {
                         Passwort
                     </label>
                 </div>
+                <Link
+                    to="/passwort-vergessen"
+                    title="Passwort zurücksetzen"
+                    className="d-block my-3"
+                >
+                    Passwort vergessen?
+                </Link>
                 <button className="w-75 btn btn-success my-3">Anmelden</button>
             </form>
         </main>

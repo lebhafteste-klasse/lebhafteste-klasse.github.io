@@ -6,6 +6,7 @@ import { auth } from "./db";
 import { onAuthStateChanged } from "firebase/auth";
 import { useCurrentTheme } from "./context";
 import nameFromEMail from "./utils";
+import { Dropdown } from "react-bootstrap";
 export default function Navbar() {
     const [active, setActive] = useState(false);
     const [theme, setTheme] = useCurrentTheme();
@@ -32,9 +33,22 @@ export default function Navbar() {
                         Anmelden
                     </Link>
                 ) : (
-                    <span className="text-white">
-                        {nameFromEMail(auth.currentUser.email)}
-                    </span>
+                    <Dropdown className="d-inline">
+                        <Dropdown.Header className="text-white d-inline">
+                            {nameFromEMail(auth.currentUser.email)}
+                        </Dropdown.Header>
+                        <Dropdown.Toggle className="bg-transparent d-inline p-0 m-1 border-0" />
+                        <Dropdown.Menu>
+                            <Dropdown.Item>
+                                <Link to="/neues-passwort">
+                                    Passwort ändern
+                                </Link>
+                            </Dropdown.Item>
+                            <Dropdown.Item onClick={() => auth.signOut()}>
+                                Abmelden
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 )}
                 <button
                     className="p-2 d-inline border border-0 bg-transparent"

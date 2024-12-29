@@ -11,6 +11,8 @@ import NewForumPost from "./pages/NewForumPost";
 import ForumPost from "./pages/ForumPost";
 import "./styles/float-label.css";
 import Homework from "./pages/Homework";
+import ResetPassword from "./pages/ResetPassword";
+import NewPassword from "./pages/NewPassword";
 
 const TestPage = function () {
     return <h1>Test</h1>;
@@ -28,7 +30,9 @@ function App() {
                     <Route path="/test" element={<TestPage />} />
                     <Route
                         path="/login"
-                        element={<Wrapper component={<Login />} />}
+                        element={
+                            <Wrapper component={<Login />} notLoggedInOnly />
+                        }
                     />
                     <Route
                         path="/news/:id"
@@ -57,6 +61,21 @@ function App() {
                     <Route
                         path="hausaufgaben/:subject"
                         element={<Wrapper component={<Homework />} />}
+                    />
+                    <Route
+                        path="passwort-vergessen"
+                        element={
+                            <Wrapper
+                                component={<ResetPassword />}
+                                notLoggedInOnly
+                            />
+                        }
+                    />
+                    <Route
+                        path="neues-passwort"
+                        element={
+                            <Wrapper component={<NewPassword />} loggedInOnly />
+                        }
                     />
                 </Routes>
             </HashRouter>
