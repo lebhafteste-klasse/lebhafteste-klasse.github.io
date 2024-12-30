@@ -8,18 +8,25 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "../styles/custom-arrows.css";
 const News = () => {
-    const [data, setData] = useState(null);
-    const newsListRef = ref(db, "news");
+    const [data, setData] = useState([]);
 
     useEffect(() => {
+        const newsListRef = ref(db, "news");
         fetchData();
 
         function fetchData() {
             onValue(query(newsListRef, limitToLast(8)), (snapshot) => {
-                if (snapshot.val()) setData(Object.values(snapshot.val()));
+                let dataGot = [];
+                snapshot.forEach((child) => {
+                    dataGot.push({
+                        id: child.key,
+                        ...child.val(),
+                    });
+                    setData(dataGot);
+                });
             });
         }
-    }, [new Date(Date.now()).getDay()]);
+    }, []);
     const PrevArrow = (props) => {
         const { className, style, onClick } = props;
         return (
@@ -79,24 +86,18 @@ const News = () => {
         return <Spinner />;
     }
     let html = [];
-    for (let [key, news] of Object.entries(data)) {
+    for (let news of data) {
         const date = new Date(news.posted_at);
-        const datestring = `Um ${date.getMinutes()}:${date.getHours()} am ${date.getDate()}.${
+        const datestring = `Um ${date.getHours()}:${date.getMinutes()} am ${date.getDate()}.${
             date.getMonth() + 1
         }.${date.getFullYear()}`;
         html.push(
-            <div key={key} className="card border border-1 m-2">
+            <div key={news.id} className="card border border-1 m-2">
                 <div className="card-body w-75">
-                    <Link to={`/news/${key}`}>
+                    <Link to={`/news/${news.id}`}>
                         <h3>{news.name}</h3>
                     </Link>
                     <p className="fs-6">{datestring}</p>
-                    {/* <p className="fs-6">
-                                    von{" "}
-                                    {news.author !== "Anonym"
-                                        ? nameFromEMail(news.author)
-                                        : "Anonym"}
-                                </p> */}
                 </div>
             </div>
         );

@@ -13,18 +13,22 @@ export default function NewsDetail() {
         onValue(dbRef, (snapshot) => {
             setNews(snapshot.val());
         });
-    }, []);
+    }, [newsId]);
     if (!Object.keys(news).length) {
         return <Spinner />;
     }
 
     return (
-        <div>
+        <div className="container">
             <div className="fw-bolder">
                 <Link to={"/"}>← Zurück</Link>
             </div>
             <h1>{news.name}</h1>
-            <div dangerouslySetInnerHTML={{ __html: news.content }}></div>
+            <div className="container">
+                {typeof news.content === "string"
+                    ? news.content
+                    : news.content.map((element) => <p>{element}</p>)}
+            </div>
         </div>
     );
 }

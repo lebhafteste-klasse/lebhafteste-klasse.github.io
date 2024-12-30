@@ -21,7 +21,7 @@ export default function Navbar() {
         <nav
             className={`navbar border-bottom border-1 border-dark mb-2 ${theme}`}
         >
-            <a className="navbar-brand px-2" href="/">
+            <a className="navbar-brand px-2" href="#/">
                 6D
             </a>
             <span>
@@ -44,7 +44,9 @@ export default function Navbar() {
                                     Passwort ändern
                                 </Link>
                             </Dropdown.Item>
-                            <Dropdown.Item onClick={() => auth.signOut()}>
+                            <Dropdown.Item
+                                onClick={() => window.location.reload()}
+                            >
                                 Abmelden
                             </Dropdown.Item>
                         </Dropdown.Menu>
@@ -102,6 +104,11 @@ export default function Navbar() {
                     <li className="nav-item">
                         <Link to={"/fachforen"} className="nav-link">
                             Forum + Hausaufgaben für jedes Fach
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to={"/neue-news"} className="nav-link">
+                            Eine News schreiben
                         </Link>
                     </li>
                 </ul>

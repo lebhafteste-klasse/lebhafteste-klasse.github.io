@@ -13,6 +13,7 @@ import "./styles/float-label.css";
 import Homework from "./pages/Homework";
 import ResetPassword from "./pages/ResetPassword";
 import NewPassword from "./pages/NewPassword";
+import NewNew from "./pages/NewNew";
 
 const TestPage = function () {
     return <h1>Test</h1>;
@@ -52,7 +53,12 @@ function App() {
                     />
                     <Route
                         path="neuer-post/:subject"
-                        element={<Wrapper component={<NewForumPost />} />}
+                        element={
+                            <Wrapper
+                                component={<NewForumPost />}
+                                loggedInOnly
+                            />
+                        }
                     />
                     <Route
                         path="forum-post/:subject/:key"
@@ -75,6 +81,12 @@ function App() {
                         path="neues-passwort"
                         element={
                             <Wrapper component={<NewPassword />} loggedInOnly />
+                        }
+                    />
+                    <Route
+                        path="neue-news"
+                        element={
+                            <Wrapper component={<NewNew />} loggedInOnly />
                         }
                     />
                 </Routes>
