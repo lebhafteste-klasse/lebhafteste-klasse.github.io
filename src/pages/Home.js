@@ -1,7 +1,7 @@
 // import AOS from "aos";
 // import "aos/dist/aos.css";
 import News from "../pages/News";
-// filepath: /c:/Users/Huawei/Desktop/Артём/Klassenwebsite/project/src/index.js
+import { JokesForHomePage } from "./Jokes";
 
 const Index = function () {
     // AOS.init();
@@ -23,6 +23,7 @@ const Index = function () {
                     <News />
                 </div>
             </div>
+            <JokesForHomePage />
         </main>
     );
 };

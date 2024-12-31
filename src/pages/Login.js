@@ -40,11 +40,12 @@ export default function Login() {
                         ? "Entweder ist die E-Mail oder das Passwort falsch. Versuche es noch mal."
                         : ""}
                 </p>
-                <div className="input-field">
+                <div className="form-floating">
                     <input
                         className={"rounded rounded-2 p-2 form-control".concat(
                             isInputActive ? " float-label-active" : ""
                         )}
+                        placeholder=" "
                         type="email"
                         id="uname"
                         name="email"
@@ -63,7 +64,7 @@ export default function Login() {
                     </label>
                 </div>
 
-                <div className="input-field mt-5">
+                <div className="form-floating mt-5">
                     <input
                         className="rounded rounded-2 p-2 form-control"
                         type="password"
@@ -71,6 +72,7 @@ export default function Login() {
                         name="pwd"
                         aria-labelledby="pwd-label"
                         required
+                        placeholder=" "
                         autoComplete="current-password"
                     />
                     <label id="pwd-label" htmlFor="pwd">

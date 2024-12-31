@@ -24,12 +24,13 @@ export default function CreateJoke() {
                 }`}
                 action={action}
             >
-                <div className="input-field form-group w-75">
+                <div className="form-floating mt-2 form-floating form-group w-75">
                     <textarea
                         id="new-joke-input"
                         name="joke-text"
                         type="text"
                         required
+                        placeholder=" "
                         className="form-control w-75"
                     />
                     <label htmlFor="new-joke-input">Neuer Witz</label>

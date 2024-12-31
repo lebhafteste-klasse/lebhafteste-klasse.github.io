@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import db, { auth } from "../db";
-import { onValue, ref } from "firebase/database";
+import { limitToLast, onValue, query, ref } from "firebase/database";
 import nameFromEMail from "../utils";
 import CreateJoke from "../components/CreateJoke";
+import { Spinner } from "react-bootstrap";
 
-export default function Jokes() {
+function Jokes() {
     const [jokes, setJokes] = useState([]);
-
     useEffect(() => {
         const jokesRef = ref(db, "jokes");
         onValue(jokesRef, (snapshot) => {
@@ -51,7 +51,7 @@ export default function Jokes() {
                     <>
                         {index >= 10 && (
                             <li key={index}>
-                                <q>{joke.text}</q> <br />
+                                <q>{joke.text}</q>
                                 <br />{" "}
                                 <cite>- {nameFromEMail(joke.author)}</cite>
                             </li>
@@ -62,3 +62,33 @@ export default function Jokes() {
         </div>
     );
 }
+export function JokesForHomePage() {
+    const [loading, setLoading] = useState(true);
+    const [jokes, setJokes] = useState([]);
+    useEffect(() => {
+        const jokesRef = ref(db, "jokes");
+        onValue(query(jokesRef, limitToLast(7)), (snapshot) => {
+            const jokesList = [];
+            snapshot.forEach((child) => {
+                jokesList.push({ id: child.key, ...child.val() });
+            });
+            setJokes(jokesList);
+            setLoading(false);
+        });
+    }, []);
+    if (loading) return <Spinner />;
+    return (
+        <div className="container">
+            <h2>Unsere neuesten Witze:</h2>
+            <ul>
+                {jokes.map((val, index) => (
+                    <li key={`joke-${index}`}>
+                        <q>{val.text}</q> <br />{" "}
+                        <small>von {nameFromEMail(val.author)}</small>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+export default Jokes;

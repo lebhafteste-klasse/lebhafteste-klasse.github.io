@@ -36,10 +36,11 @@ export default function NewPassword() {
                         ? "Das Passwort konnte nicht geändert werden. Versuche es noch mal und überprüfe das alte Passwort."
                         : ""}
                 </p>
-                <div className="form-group input-field m-3">
+                <div className="form-group form-floating m-3">
                     <input
                         type="password"
                         id="old-pwd"
+                        placeholder=" "
                         name="old-pwd"
                         autoComplete="current-password"
                         onChange={(e) => {
@@ -52,11 +53,12 @@ export default function NewPassword() {
                         Altes Passwort (für Sicherheit)
                     </label>
                 </div>
-                <div className="form-group input-field m-3">
+                <div className="form-group form-floating m-3">
                     <input
                         type="password"
                         id="pwd"
                         name="pwd"
+                        placeholder=" "
                         onChange={(e) => setNewPwd(e.target.value)}
                         required
                         autoComplete="new-password"

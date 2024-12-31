@@ -29,9 +29,10 @@ export default function NewForumPost() {
     return (
         <div className="container">
             <h1>Neuer Forum-Post</h1>
-            <div className="mb-3 input-field">
+            <div className="mb-3 form-floating">
                 <input
                     required
+                    placeholder=" "
                     type="text"
                     id="title"
                     className="form-control"
@@ -42,9 +43,10 @@ export default function NewForumPost() {
                     Titel
                 </label>
             </div>
-            <div className="mb-3 input-field">
+            <div className="mb-3 form-floating">
                 <textarea
                     id="content"
+                    placeholder=" "
                     className="form-control"
                     value={content}
                     required

@@ -23,11 +23,12 @@ export default function ResetPassword() {
                             });
                     }}
                 >
-                    <div className="form-group input-field">
+                    <div className="form-group form-floating">
                         <input
                             type="email"
                             id="email"
                             name="email"
+                            placeholder=" "
                             onChange={(e) => setEmail(e.target.value)}
                             required
                             className="form-control"

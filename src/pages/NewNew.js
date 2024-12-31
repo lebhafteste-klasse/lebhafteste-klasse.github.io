@@ -36,10 +36,11 @@ export default function NewNew() {
                 }}
                 id="form"
             >
-                <div className="form-group input-field m-3">
+                <div className="form-group form-floating m-3">
                     <input
                         type="text"
                         id="title"
+                        placeholder=" "
                         value={title}
                         className="form-control"
                         onChange={(e) => setTitle(e.target.value)}
@@ -47,13 +48,14 @@ export default function NewNew() {
                     <label htmlFor="title">Die Kopfzeile (Überschrift)</label>
                 </div>
                 {paragraphs.map((paragraph, index) => (
-                    <div key={index} className="form-group m-3 input-field">
+                    <div key={index} className="form-group m-3 form-floating">
                         <textarea
                             value={paragraph}
                             id={`p-${index + 1}`}
                             onChange={(e) =>
                                 handleParagraphChange(index, e.target.value)
                             }
+                            placeholder=" "
                             className="form-control"
                         />
                         <label htmlFor={`p-${index + 1}`}>

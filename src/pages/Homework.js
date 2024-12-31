@@ -67,11 +67,12 @@ export default function Homework() {
                 <div className="text-end">
                     {formVisible && (
                         <form className="d-flex w-75">
-                            <div className="form-group input-field w-75">
+                            <div className="form-group form-floating w-75">
                                 <textarea
                                     name="homework"
                                     id="homework"
                                     className="form-control"
+                                    placeholder=" "
                                 ></textarea>
                                 <label htmlFor="homework">Hausaufgabe</label>
                             </div>
