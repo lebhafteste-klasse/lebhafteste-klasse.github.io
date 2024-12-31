@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "../styles/custom-arrows.css";
+import { formatDate } from "../utils";
 const News = () => {
     const [data, setData] = useState([]);
 
@@ -88,16 +89,13 @@ const News = () => {
     let html = [];
     for (let news of data) {
         const date = new Date(news.posted_at);
-        const datestring = `Um ${date.getHours()}:${date.getMinutes()} am ${date.getDate()}.${
-            date.getMonth() + 1
-        }.${date.getFullYear()}`;
         html.push(
             <div key={news.id} className="card border border-1 m-2">
                 <div className="card-body w-75">
                     <Link to={`/news/${news.id}`}>
                         <h3>{news.name}</h3>
                     </Link>
-                    <p className="fs-6">{datestring}</p>
+                    <p className="fs-6">{formatDate(date)}</p>
                 </div>
             </div>
         );

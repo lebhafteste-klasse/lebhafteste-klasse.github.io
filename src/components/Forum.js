@@ -11,7 +11,7 @@ import {
     limitToFirst,
     endAt,
 } from "firebase/database";
-import nameFromEMail from "../utils";
+import nameFromEMail, { formatDate } from "../utils";
 export default function Forum({ subject }) {
     // the list of posts
     const [posts, setPosts] = useState([]);
@@ -50,7 +50,7 @@ export default function Forum({ subject }) {
             >
                 <Link to={`/forum-post/${subject}/${key}`}>{post.title}</Link>
                 <small className="d-block">
-                    am {new Date(post.posted_at).toLocaleString()}
+                    {formatDate(new Date(post.posted_at))}
                     <br />
                     {post.author !== "Anonym"
                         ? "von " + nameFromEMail(post.author)
