@@ -23,3 +23,12 @@ export const formatDate = (date) => {
             : date.getMinutes()
     } am ${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
 };
+export const addOrRemove = (array, value) => {
+    var index = array.indexOf(value);
+
+    if (index === -1) {
+        array.push(value);
+    } else {
+        array.splice(index, 1);
+    }
+};

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { ref, onValue, set, get, push } from "firebase/database";
 import { Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { beginWithCapital } from "../utils";
+import { beginWithCapital, addOrRemove } from "../utils";
 
 export default function Homework() {
     const [homework, setHomework] = useState([]);
@@ -30,15 +30,7 @@ export default function Homework() {
         });
         return () => unsubscribe();
     }, [subject]);
-    const addOrRemove = (array, value) => {
-        var index = array.indexOf(value);
 
-        if (index === -1) {
-            array.push(value);
-        } else {
-            array.splice(index, 1);
-        }
-    };
     const toggleAsDone = (id) => {
         const homeworkRefDoneby = ref(
             db,
