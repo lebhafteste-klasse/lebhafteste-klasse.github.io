@@ -103,7 +103,7 @@ export default function Navbar() {
                     </li>
                     <li className="nav-item">
                         <Link to={"/fachforen"} className="nav-link">
-                            Forum + Hausaufgaben für jedes Fach
+                            Forum + Hausaufgaben + Übungen für jedes Fach
                         </Link>
                     </li>
                     <li className="nav-item">

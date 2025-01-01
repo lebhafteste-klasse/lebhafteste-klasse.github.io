@@ -1,0 +1,13 @@
+#exercises {
+    display: flex;
+
+    @media (max-width: 768px) {
+        flex-wrap: wrap;
+    }
+    @media screen and (min-width: 480px) {
+        & > div {
+            min-width: 400px;
+            margin: 10px;
+        }
+    }
+}
