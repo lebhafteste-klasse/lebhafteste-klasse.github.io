@@ -242,7 +242,7 @@ export default function Exercises() {
                                                 </div>
                                                 <br />
                                                 <div className="form-group form-floating">
-                                                    <input
+                                                    <textarea
                                                         type="text"
                                                         id="answer"
                                                         name="answer"
