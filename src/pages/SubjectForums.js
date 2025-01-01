@@ -61,7 +61,7 @@ export default function SubjectForums() {
                                 Hausis
                             </Link>
                         )}
-                        <Link to={`/exercises/${subject}`}>Übungen</Link>
+                        <Link to={`/exercises/${subject.id}`}>Übungen</Link>
                     </div>
                 ))}
             </div>
