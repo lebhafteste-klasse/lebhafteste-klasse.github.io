@@ -5,16 +5,20 @@ import {
     browserLocalPersistence,
 } from "firebase/auth";
 import { useState } from "react";
+import { Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function Login() {
     const [hasError, setHasError] = useState(false);
     const [isInputActive, setActive] = useState(false);
+    const [loading, setLoading] = useState(false);
+    if (loading) return <Spinner />;
     return (
         <main className="d-flex justify-content-center align-items-center">
             <form
                 action={
                     /** @param {FormData} formData*/ (formData) => {
+                        setLoading(true);
                         setPersistence(auth, browserLocalPersistence).then(
                             () => {
                                 signInWithEmailAndPassword(
@@ -22,11 +26,12 @@ export default function Login() {
                                     formData.get("email"),
                                     formData.get("pwd")
                                 )
-                                    .catch((err) => {
-                                        setHasError(true);
-                                    })
-                                    .then((v) => {
+                                    .then(() => {
                                         window.history.back();
+                                    })
+                                    .catch(() => {
+                                        setHasError(true);
+                                        setLoading(false);
                                     });
                             }
                         );
