@@ -4,22 +4,22 @@ import "../styles/SubjectForums.css";
 import React from "react";
 import { Link } from "react-router-dom";
 
+export const subjects = [
+    { id: "deutsch", name: "Deutsch", color: "red" },
+    { id: "mathe", name: "Mathe", color: "blue" },
+    { id: "englisch", name: "Englisch", color: "green" },
+    { id: "geschichte", name: "Gesch.", color: "yellow" },
+    { id: "bio", name: "Biologie", color: "lime" },
+    { id: "physik", name: "BNT-T", color: "cyan" },
+    // { id: 'chemie', name: 'Chemie' },
+    // { id: 'informatik', name: 'Informatik' },
+    { id: "musik", name: "Musik", color: "skyblue" },
+    { id: "kunst", name: "BK", color: "pink" },
+    { id: "NWT", name: "NWT", color: "black" },
+    { id: "ethik", name: "Eth/Reli", color: "purple" },
+    { id: "geographie", name: "Geo", color: "brown" },
+];
 export default function SubjectForums() {
-    const subjects = [
-        { id: "deutsch", name: "Deutsch", color: "red" },
-        { id: "mathe", name: "Mathe", color: "blue" },
-        { id: "englisch", name: "Englisch", color: "green" },
-        { id: "geschichte", name: "Gesch.", color: "yellow" },
-        { id: "bio", name: "Biologie", color: "lime" },
-        { id: "physik", name: "BNT-T", color: "cyan" },
-        // { id: 'chemie', name: 'Chemie' },
-        // { id: 'informatik', name: 'Informatik' },
-        { id: "musik", name: "Musik", color: "skyblue" },
-        { id: "kunst", name: "BK", color: "pink" },
-        { id: "NWT", name: "NWT", color: "black" },
-        { id: "ethik", name: "Eth/Reli", color: "purple" },
-        { id: "geographie", name: "Geo", color: "brown" },
-    ];
     return (
         <div className="container">
             <h1>Ein Forum + Hausaufgabenliste + Übungen für jedes Fach</h1>

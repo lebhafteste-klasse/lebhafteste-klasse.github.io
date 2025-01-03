@@ -15,6 +15,7 @@ import ResetPassword from "./pages/ResetPassword";
 import NewPassword from "./pages/NewPassword";
 import NewNew from "./pages/NewNew";
 import Exercises from "./pages/Exercises";
+import NewExam from "./pages/NewExam";
 
 const TestPage = function () {
     return <h1>Test</h1>;
@@ -93,6 +94,12 @@ function App() {
                     <Route
                         path="exercises/:subject"
                         element={<Wrapper component={<Exercises />} />}
+                    />
+                    <Route
+                        path="neue-pruefung"
+                        element={
+                            <Wrapper component={<NewExam />} loggedInOnly />
+                        }
                     />
                 </Routes>
             </HashRouter>

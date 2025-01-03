@@ -111,6 +111,11 @@ export default function Navbar() {
                             Eine News schreiben
                         </Link>
                     </li>
+                    <li className="nav-item">
+                        <Link to={"/neue-pruefung"} className="nav-link">
+                            Klassenarbeit ankündigen
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </nav>

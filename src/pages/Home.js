@@ -1,5 +1,6 @@
 // import AOS from "aos";
 // import "aos/dist/aos.css";
+import Exams from "../components/Exams";
 import News from "../pages/News";
 import { JokesForHomePage } from "./Jokes";
 
@@ -23,6 +24,7 @@ const Index = function () {
                     <News />
                 </div>
             </div>
+            <Exams />
             <JokesForHomePage />
         </main>
     );
