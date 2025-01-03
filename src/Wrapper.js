@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { auth } from "./db";
 import Navbar from "./Navbar";
 
@@ -6,12 +8,16 @@ export default function Wrapper({
     loggedInOnly = false,
     notLoggedInOnly = false,
 }) {
-    if (loggedInOnly && !auth.currentUser) {
-        window.location.hash = "/login";
-    }
-    if (notLoggedInOnly && auth.currentUser) {
-        window.history.back();
-    }
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (loggedInOnly && !auth.currentUser) {
+            navigate("/login");
+        } else if (notLoggedInOnly && auth.currentUser) {
+            navigate(-1); // Go back to the previous page
+        }
+    }, [loggedInOnly, notLoggedInOnly, navigate]);
+
     return (
         <>
             <Navbar />

@@ -39,7 +39,7 @@ export default function Login() {
                 }
                 className="w-50 h-75 border border-1 rounded rounded-3 border-success text-center"
             >
-                <h1 className="m-3">Anmelden</h1>
+                <h1 className="m-3">Zuerst anmelden, dann alles andere!</h1>
                 <p style={{ color: "red" }}>
                     {hasError
                         ? "Entweder ist die E-Mail oder das Passwort falsch. Versuche es noch mal."
