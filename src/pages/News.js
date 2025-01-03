@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "../styles/custom-arrows.css";
 import { formatDate } from "../utils";
+import { PrevArrow, NextArrow } from "../components/Arrows";
 const News = () => {
     const [data, setData] = useState([]);
 
@@ -28,34 +29,7 @@ const News = () => {
             });
         }
     }, []);
-    const PrevArrow = (props) => {
-        const { className, style, onClick } = props;
-        return (
-            <img
-                src="/prev.svg"
-                className={`bg-primary d-inline ${className} custom-prev-arrow`}
-                style={{ ...style, display: "block" }}
-                onClick={onClick}
-                alt="Zurück"
-                width={30}
-                height={30}
-            />
-        );
-    };
-    const NextArrow = (props) => {
-        const { className, style, onClick } = props;
-        return (
-            <img
-                src="/next.svg"
-                className={`bg-primary d-inline ${className} custom-next-arrow`}
-                style={{ ...style, display: "block" }}
-                onClick={onClick}
-                alt="Vorwärts"
-                width={30}
-                height={30}
-            />
-        );
-    };
+
     const settings = {
         dots: true,
         infinite: true,
@@ -86,23 +60,23 @@ const News = () => {
     if (!data) {
         return <Spinner />;
     }
-    let html = [];
-    for (let news of data) {
-        const date = new Date(news.posted_at);
-        html.push(
-            <div key={news.id} className="card border border-1 m-2">
-                <div className="card-body w-75">
-                    <Link to={`/news/${news.id}`}>
-                        <h3>{news.name}</h3>
-                    </Link>
-                    <p className="fs-6">{formatDate(date)}</p>
-                </div>
-            </div>
-        );
-    }
+
     return (
         <div style={{ width: "80%", margin: "auto" }}>
-            <Slider {...settings}>{html}</Slider>
+            <Slider {...settings}>
+                {data.map((news) => (
+                    <div key={news.id} className="card border border-1 m-2">
+                        <div className="card-body w-75">
+                            <Link to={`/news/${news.id}`}>
+                                <h3>{news.name}</h3>
+                            </Link>
+                            <p className="fs-6">
+                                {formatDate(new Date(news.posted_at))}
+                            </p>
+                        </div>
+                    </div>
+                ))}
+            </Slider>
         </div>
     );
 };

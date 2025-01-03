@@ -30,7 +30,7 @@ export default function SubjectForums() {
                         className="border border-1 rounded rounded-3 d-flex subject-item"
                     >
                         <div
-                            className={`h-100 w-25 d-flex align-items-center justify-content-center ${
+                            className={`h-100 w-25 d-flex align-items-center justify-content-center p-2 ${
                                 [
                                     "NWT",
                                     "Mathe",
@@ -45,23 +45,25 @@ export default function SubjectForums() {
                         >
                             {subject.name}
                         </div>
-                        <Link
-                            to={`/forum/${subject.id}`}
-                            className="d-inline me-3"
-                        >
-                            Forum
-                        </Link>
-                        {!["Sport", "Kunst", "Ethik/Reli"].includes(
-                            subject.name
-                        ) && (
+                        <div className="p-2">
                             <Link
-                                to={`/hausaufgaben/${subject.id}`}
-                                className="d-inline"
+                                to={`/forum/${subject.id}`}
+                                className="d-inline me-3"
                             >
-                                Hausis
+                                Forum
                             </Link>
-                        )}
-                        <Link to={`/exercises/${subject.id}`}>Übungen</Link>
+                            {!["Sport", "Kunst", "Ethik/Reli"].includes(
+                                subject.name
+                            ) && (
+                                <Link
+                                    to={`/hausaufgaben/${subject.id}`}
+                                    className="d-inline m-2"
+                                >
+                                    Hausis
+                                </Link>
+                            )}
+                            <Link to={`/exercises/${subject.id}`}>Übungen</Link>
+                        </div>
                     </div>
                 ))}
             </div>
