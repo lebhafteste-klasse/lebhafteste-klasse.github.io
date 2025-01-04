@@ -9,11 +9,11 @@ export default function NewExam() {
                 onSubmit={(e) => {
                     e.preventDefault();
                     const subject = e.target.subject.value;
-                    const is_test = Boolean(parseInt(e.target.isTest.value));
+                    const type = e.target.type.value;
                     const date = new Date(e.target.date.value).getTime();
                     push(ref(db, "exams"), {
                         subject,
-                        is_test,
+                        type,
                         is_at: date,
                     }).then(() => window.history.back());
                 }}
@@ -36,17 +36,18 @@ export default function NewExam() {
                     </select>
                 </div>
                 <div className="form-group m-3">
-                    <label htmlFor="isTest" className="form-label">
+                    <label htmlFor="type" className="form-label">
                         Art:
                     </label>
                     <select
-                        name="isTest"
-                        id="isTest"
+                        name="type"
+                        id="type"
                         className="form-control form-select"
                         required
                     >
-                        <option value="1">Test</option>
-                        <option value="0">Klassenarbeit</option>
+                        <option value="Diktat">Diktat</option>
+                        <option value="Test">Test</option>
+                        <option value="Klassenarbeit">Klassenarbeit</option>
                     </select>
                 </div>
                 <div className="form-group m-3">
