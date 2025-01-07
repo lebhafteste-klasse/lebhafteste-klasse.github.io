@@ -116,6 +116,11 @@ export default function Navbar() {
                             Klassenarbeit ankündigen
                         </Link>
                     </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to={"/neues-event"}>
+                            Ein Event ankündigen
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </nav>
