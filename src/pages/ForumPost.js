@@ -52,8 +52,8 @@ export default function ForumPost() {
             </small>
             <br />
             <div>{post.content}</div>
-            <hr />
-            <h2>Antworten:</h2>
+            <div style={{ marginTop: "10%" }} />
+            <h4>Antworten:</h4>
             <div>
                 {answers
                     ? Object.values(answers).map((val, index) => {
@@ -74,7 +74,7 @@ export default function ForumPost() {
                 <hr />
                 {auth.currentUser ? (
                     <form onSubmit={handleSubmit} className="mt-5">
-                        <h2>Neue Antwort zu diesem Post</h2>
+                        <h4>Neue Antwort zu diesem Post</h4>
                         <div className="form-group form-floating">
                             <textarea
                                 name="new-post-text"

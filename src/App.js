@@ -10,12 +10,14 @@ import SubjectForum from "./pages/SubjectForum";
 import NewForumPost from "./pages/NewForumPost";
 import ForumPost from "./pages/ForumPost";
 import "./styles/float-label.css";
+import "./styles/slick.css";
 import Homework from "./pages/Homework";
 import ResetPassword from "./pages/ResetPassword";
 import NewPassword from "./pages/NewPassword";
 import NewNew from "./pages/NewNew";
 import Exercises from "./pages/Exercises";
 import NewExam from "./pages/NewExam";
+import NewEvent from "./pages/NewEvent";
 
 const TestPage = function () {
     return <h1>Test</h1>;
@@ -51,6 +53,10 @@ function App() {
                     />
                     <Route
                         path="forum/:subject"
+                        element={<Wrapper component={<SubjectForum />} />}
+                    />
+                    <Route
+                        path="forum/:subject/:page"
                         element={<Wrapper component={<SubjectForum />} />}
                     />
                     <Route
@@ -99,6 +105,12 @@ function App() {
                         path="neue-pruefung"
                         element={
                             <Wrapper component={<NewExam />} loggedInOnly />
+                        }
+                    />
+                    <Route
+                        path="neues-event"
+                        element={
+                            <Wrapper component={<NewEvent />} loggedInOnly />
                         }
                     />
                 </Routes>
