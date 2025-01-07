@@ -1,5 +1,5 @@
 // a component that display a list of events from the firebase database
-import { ref, onValue } from "firebase/database";
+import { ref, onValue, query, orderByChild } from "firebase/database";
 import React, { useEffect, useState } from "react";
 import db from "../db";
 import "slick-carousel/slick/slick.css";
@@ -13,7 +13,7 @@ export default function Events() {
 
     useEffect(() => {
         const eventsRef = ref(db, "events");
-        onValue(eventsRef, (snapshot) => {
+        onValue(query(eventsRef, orderByChild("is_at")), (snapshot) => {
             const events = [];
             snapshot.forEach((child) => {
                 events.push({
@@ -21,7 +21,7 @@ export default function Events() {
                     ...child.val(),
                 });
             });
-            setEvents(events);
+            setEvents(events.reverse());
         });
     }, []);
     /**
