@@ -11,12 +11,12 @@ export default function ForumPost() {
     const subject = useParams().subject;
     const key = useParams().key;
     useEffect(() => {
-        const dbRef = ref(db, `${subject}-posts/${key}`);
+        const dbRef = ref(db, `forum/${subject}/${key}`);
         onValue(dbRef, (snapshot) => {
             const data = snapshot.val();
             setPost(data);
         });
-        const answersRef = ref(db, `${subject}-posts/${key}/answers`);
+        const answersRef = ref(db, `forum/${subject}/${key}/answers`);
         onValue(answersRef, (snapshot) => {
             const data = snapshot.val();
             setAnswers(data);
@@ -29,7 +29,7 @@ export default function ForumPost() {
         e.preventDefault();
         const text = document.getElementById("new-post-text").value;
         const asAuthor = document.getElementById("as-author").checked;
-        push(ref(db, `${subject}-posts/${key}/answers`), {
+        push(ref(db, `forum/${subject}/${key}/answers`), {
             content: text,
             author: asAuthor ? auth.currentUser.email : "Anonym",
             posted_at: Date.now(),
@@ -50,6 +50,7 @@ export default function ForumPost() {
                     ? "von " + nameFromEMail(post.author)
                     : ""}
             </small>
+            <br />
             <div>{post.content}</div>
             <hr />
             <h2>Antworten:</h2>
@@ -70,7 +71,8 @@ export default function ForumPost() {
                           );
                       })
                     : "Noch keine Antworten zu diesem Post."}
-                {auth.currentUser && (
+                <hr />
+                {auth.currentUser ? (
                     <form onSubmit={handleSubmit} className="mt-5">
                         <h2>Neue Antwort zu diesem Post</h2>
                         <div className="form-group form-floating">
@@ -104,6 +106,8 @@ export default function ForumPost() {
                             Antwort hinzufügen
                         </button>
                     </form>
+                ) : (
+                    "Du musst angemeldet sein, um eine Antwort schreiben zu können."
                 )}
             </div>
         </div>

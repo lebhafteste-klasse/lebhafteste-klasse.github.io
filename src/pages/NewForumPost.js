@@ -13,6 +13,7 @@ export default function NewForumPost() {
     const [showUser, setShowUser] = useState(true);
     // the history object to navigate back after creating the post
     // create a new post in the database and navigate back
+
     const createPost = () => {
         const newPost = {
             title,
@@ -20,7 +21,7 @@ export default function NewForumPost() {
             author: showUser ? auth.currentUser.email : "Anonym",
             posted_at: Date.now(),
         };
-        push(ref(db, `${subject}-posts`), newPost);
+        push(ref(db, `forum/${subject}`), newPost);
         window.history.back();
     };
     if (!subject) {
