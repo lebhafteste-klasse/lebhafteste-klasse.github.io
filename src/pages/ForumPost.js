@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ref, onValue, push } from "firebase/database";
 import db, { auth } from "../db";
-import nameFromEMail, { formatDate } from "../utils";
+import { formatDate } from "../utils";
 import Spinner from "react-bootstrap/Spinner";
 
 export default function ForumPost() {
@@ -28,10 +28,9 @@ export default function ForumPost() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const text = document.getElementById("new-post-text").value;
-        const asAuthor = document.getElementById("as-author").checked;
         push(ref(db, `forum/${subject}/${key}/answers`), {
             content: text,
-            author: asAuthor ? auth.currentUser.email : "Anonym",
+            author: auth.currentUser.email,
             posted_at: Date.now(),
         });
     };
@@ -46,9 +45,6 @@ export default function ForumPost() {
             <small>
                 {formatDate(new Date(post.posted_at))}
                 <br />
-                {post.author !== "Anonym"
-                    ? "von " + nameFromEMail(post.author)
-                    : ""}
             </small>
             <br />
             <div>{post.content}</div>
@@ -63,9 +59,6 @@ export default function ForumPost() {
                                   <small>
                                       {formatDate(new Date(val.posted_at))}
                                       <br />
-                                      {val.author !== "Anonym" && (
-                                          <>von {nameFromEMail(val.author)}</>
-                                      )}
                                   </small>
                               </div>
                           );
@@ -85,21 +78,6 @@ export default function ForumPost() {
                             ></textarea>
                             <label htmlFor="new-post-text">
                                 Der Inhalt der neuen Antwort
-                            </label>
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="checkbox"
-                                name="show-as-author"
-                                className="form-check d-inline form-check-input"
-                                id="as-author"
-                                defaultChecked
-                            />
-                            <label
-                                htmlFor="as-author"
-                                className="form-check-label form-label"
-                            >
-                                Dich als Author eintragen
                             </label>
                         </div>
                         <button type="submit" className="btn btn-primary">

@@ -15,7 +15,7 @@ export default function Homework() {
     const subject = useParams().subject;
     useEffect(() => {
         const homeworkRef = ref(db, `homework/${subject}-homework`);
-        const unsubscribe = onValue(homeworkRef, (snapshot) => {
+        onValue(homeworkRef, (snapshot) => {
             const homeworkList = [];
             snapshot.forEach((child) => {
                 let newHomework = {
@@ -28,7 +28,6 @@ export default function Homework() {
             setHomework(homeworkList);
             setLoading(false);
         });
-        return () => unsubscribe();
     }, [subject]);
 
     const toggleAsDone = (id) => {
@@ -72,15 +71,16 @@ export default function Homework() {
                                 className="btn btn-primary"
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    const homeworkRef = push(
-                                        ref(db, `homework/${subject}-homework`)
-                                    );
                                     const newHomework = {
                                         content:
                                             document.getElementById("homework")
                                                 .value,
+                                        author: auth.currentUser.email,
                                     };
-                                    set(homeworkRef, newHomework);
+                                    push(
+                                        ref(db, `homework/${subject}-homework`),
+                                        newHomework
+                                    );
                                     setFormVisible(false);
                                 }}
                             >
@@ -119,16 +119,12 @@ export default function Homework() {
                                         type="checkbox"
                                         id="mark-as-done"
                                         onChange={() => {
-                                            console.log(hw.id);
                                             toggleAsDone(hw.id);
                                         }}
                                         className="form-check-inline me-0 border-primary border-2 form-check-input d-inline"
-                                        defaultChecked={
-                                            auth.currentUser &&
-                                            hw.doneby.includes(
-                                                auth.currentUser.email
-                                            )
-                                        }
+                                        defaultChecked={hw.doneby.includes(
+                                            auth.currentUser.email
+                                        )}
                                     />{" "}
                                     Gemacht
                                 </span>

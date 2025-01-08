@@ -1,14 +1,17 @@
 import { push, ref } from "firebase/database";
-import db from "../db";
+import db, { auth } from "../db";
 export default function NewEvent() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const title = e.currentTarget.title.value;
         const description = e.currentTarget.description.value;
         const is_at = e.currentTarget.is_at.valueAsDate.getTime();
-        push(ref(db, "events"), { title, description, is_at }).then(() =>
-            window.history.back()
-        );
+        push(ref(db, "events"), {
+            title,
+            description,
+            is_at,
+            author: auth.currentUser.email,
+        }).then(() => window.history.back());
     };
     return (
         <main className="d-flex align-items-center justify-content-center">

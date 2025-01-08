@@ -1,20 +1,97 @@
 import React, { useState, useEffect } from "react";
 import db, { auth } from "../db";
-import { limitToLast, onValue, query, ref } from "firebase/database";
-import nameFromEMail from "../utils";
+import {
+    limitToLast,
+    onValue,
+    query,
+    ref,
+    remove,
+    set,
+} from "firebase/database";
 import CreateJoke from "../components/CreateJoke";
 import { Spinner } from "react-bootstrap";
-
+import PencilIcon from "../components/PencilIcon";
+import TrashCanIcon from "../components/TrashCanIcon";
+function Joke({ joke, index }) {
+    const [editFormVisible, setEditFormVisible] = useState(false);
+    const editFormSubmit = (e) => {
+        e.preventDefault();
+        const text = e.currentTarget.newtext.value;
+        set(ref(db, `jokes/${joke.id}`), { text, author: joke.author }).then(
+            () => {
+                setEditFormVisible(false);
+            }
+        );
+    };
+    const deleteFormSubmit = () => {
+        remove(ref(db, `jokes/${joke.id}`));
+    };
+    return (
+        <li
+            key={index}
+            className="card border border-1 p-3 rounded rounded-3 w-50"
+        >
+            <div className="card-body">
+                <q>{joke.text}</q>
+                {auth.currentUser && auth.currentUser.email === joke.author && (
+                    <>
+                        {editFormVisible && (
+                            <form onSubmit={editFormSubmit} className="m-3">
+                                <div className="form-group form-floating mb-3">
+                                    <textarea
+                                        type="text"
+                                        name="newtext"
+                                        rows={3}
+                                        id={"newtext"}
+                                        defaultValue={joke.text}
+                                        className="form-control"
+                                        placeholder=" "
+                                    />
+                                    <label htmlFor="newtext">
+                                        Der Witztext
+                                    </label>
+                                </div>
+                                <button
+                                    type="submit"
+                                    className="btn btn-primary"
+                                >
+                                    Änderungen bestätigen
+                                </button>
+                            </form>
+                        )}
+                        <PencilIcon
+                            strokeWidth="2"
+                            fill="orange"
+                            width="25"
+                            height="25"
+                            className="mx-2"
+                            aria-label="Witz ändern"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => setEditFormVisible(!editFormVisible)}
+                        />
+                        <TrashCanIcon
+                            fill="red"
+                            width="25"
+                            height="25"
+                            aria-label="Witz löschen"
+                            style={{ cursor: "pointer" }}
+                            onClick={deleteFormSubmit}
+                        />
+                    </>
+                )}
+            </div>
+        </li>
+    );
+}
 function Jokes() {
     const [jokes, setJokes] = useState([]);
     useEffect(() => {
         const jokesRef = ref(db, "jokes");
         onValue(jokesRef, (snapshot) => {
-            const jokes = snapshot.val();
             const jokesList = [];
-            for (let id in jokes) {
-                jokesList.push(jokes[id]);
-            }
+            snapshot.forEach((child) => {
+                jokesList.push({ id: child.key, ...child.val() });
+            });
             setJokes(jokesList);
         });
     }, []);
@@ -36,27 +113,11 @@ function Jokes() {
             </div>
             <ul>
                 {jokes.map((joke, index) => (
-                    <>
-                        {index < 10 && (
-                            <li key={index}>
-                                <q>{joke.text}</q>
-                                <br />{" "}
-                                <cite>- {nameFromEMail(joke.author)}</cite>
-                            </li>
-                        )}
-                    </>
+                    <>{index < 10 && <Joke joke={joke} index={index} />}</>
                 ))}
                 {jokes.length >= 10 && <h2>Die schon älteren</h2>}
                 {jokes.map((joke, index) => (
-                    <>
-                        {index >= 10 && (
-                            <li key={index}>
-                                <q>{joke.text}</q>
-                                <br />{" "}
-                                <cite>- {nameFromEMail(joke.author)}</cite>
-                            </li>
-                        )}
-                    </>
+                    <>{index >= 10 && <Joke joke={joke} index={index} />}</>
                 ))}
             </ul>
         </div>
@@ -84,7 +145,6 @@ export function JokesForHomePage() {
                 {jokes.map((val, index) => (
                     <li key={`joke-${index}`}>
                         <q>{val.text}</q> <br />{" "}
-                        <small>von {nameFromEMail(val.author)}</small>
                     </li>
                 ))}
             </ul>

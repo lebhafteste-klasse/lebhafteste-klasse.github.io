@@ -13,7 +13,7 @@ import {
     // set,
     // orderByValue,
 } from "firebase/database";
-import nameFromEMail, { formatDate } from "../utils";
+import { formatDate } from "../utils";
 import { useCurrentTheme } from "../context";
 export default function Forum({ subject }) {
     // the list of posts
@@ -89,9 +89,6 @@ export default function Forum({ subject }) {
                           <small className="d-block">
                               {formatDate(new Date(-post.posted_at))}
                               <br />
-                              {post.author !== "Anonym"
-                                  ? "von " + nameFromEMail(post.author)
-                                  : ""}
                           </small>
                       </div>
                   ))

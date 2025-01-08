@@ -1,6 +1,6 @@
 import { push, ref } from "firebase/database";
 import { subjects } from "./SubjectForums";
-import db from "../db";
+import db, { auth } from "../db";
 export default function NewExam() {
     return (
         <div className="container">
@@ -15,6 +15,7 @@ export default function NewExam() {
                         subject,
                         type,
                         is_at: date,
+                        author: auth.currentUser,
                     }).then(() => window.history.back());
                 }}
             >

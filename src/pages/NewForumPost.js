@@ -10,7 +10,6 @@ export default function NewForumPost() {
     // the title and content of the post
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [showUser, setShowUser] = useState(true);
     // the history object to navigate back after creating the post
     // create a new post in the database and navigate back
 
@@ -18,7 +17,7 @@ export default function NewForumPost() {
         const newPost = {
             title,
             content,
-            author: showUser ? auth.currentUser.email : "Anonym",
+            author: auth.currentUser.email,
             posted_at: Date.now(),
         };
         push(ref(db, `forum/${subject}`), newPost);
@@ -56,19 +55,6 @@ export default function NewForumPost() {
                 ></textarea>
                 <label htmlFor="content" className="form-label">
                     Inhalt
-                </label>
-            </div>
-            <div className="mb-3">
-                <input
-                    type="checkbox"
-                    id="show-user"
-                    className="form-check-input me-2"
-                    defaultChecked
-                    name="show-user"
-                    onChange={(e) => setShowUser(e.target.checked)}
-                />
-                <label htmlFor="show-user" className="ml-2 form-label">
-                    Dich als Author anzeigen (sonst: Anonym)
                 </label>
             </div>
             <button className="btn btn-primary" onClick={createPost}>

@@ -15,8 +15,9 @@ export default function Exams() {
                 if (
                     date.getFullYear() > now.getFullYear() ||
                     (date.getFullYear() === now.getFullYear() &&
-                        date.getMonth() >= now.getMonth() &&
-                        date.getDate() >= now.getDate())
+                        (date.getMonth() > now.getMonth() ||
+                            (date.getMonth() === now.getMonth() &&
+                                date.getDate() >= now.getDate())))
                 ) {
                     examsList.push({
                         id: childSnapshot.key,
