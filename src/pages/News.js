@@ -1,33 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ref, onValue, limitToLast, query } from "firebase/database";
+import { ref, onValue, limitToLast, query, remove } from "firebase/database";
 import { Spinner } from "react-bootstrap";
-import db from "../db";
+import db, { auth } from "../db";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "../styles/custom-arrows.css";
 import { formatDate } from "../utils";
 import { PrevArrow, NextArrow } from "../components/Arrows";
+import PencilIcon from "../components/PencilIcon";
+import TrashCanIcon from "../components/TrashCanIcon";
 const News = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
         const newsListRef = ref(db, "news");
-        fetchData();
 
-        function fetchData() {
-            onValue(query(newsListRef, limitToLast(8)), (snapshot) => {
-                let dataGot = [];
-                snapshot.forEach((child) => {
-                    dataGot.push({
-                        id: child.key,
-                        ...child.val(),
-                    });
-                    setData(dataGot);
+        onValue(query(newsListRef, limitToLast(8)), (snapshot) => {
+            let dataGot = [];
+            snapshot.forEach((child) => {
+                dataGot.push({
+                    id: child.key,
+                    ...child.val(),
                 });
+                setData(dataGot);
             });
-        }
+        });
     }, []);
 
     const settings = {
@@ -73,6 +72,34 @@ const News = () => {
                             <p className="fs-6">
                                 {formatDate(new Date(news.posted_at))}
                             </p>
+                            {auth.currentUser &&
+                                auth.currentUser.email === news.author && (
+                                    <div>
+                                        <Link to={`/edit-news/${news.id}`}>
+                                            <PencilIcon
+                                                strokeWidth="2"
+                                                fill="orange"
+                                                width="25"
+                                                height="25"
+                                                className="mx-2"
+                                                aria-label="Witz ändern"
+                                                style={{ cursor: "pointer" }}
+                                            />
+                                        </Link>
+                                        <TrashCanIcon
+                                            fill="red"
+                                            width="25"
+                                            height="25"
+                                            aria-label="Witz löschen"
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() =>
+                                                remove(
+                                                    ref(db, `news/${news.id}`)
+                                                )
+                                            }
+                                        />
+                                    </div>
+                                )}
                         </div>
                     </div>
                 ))}

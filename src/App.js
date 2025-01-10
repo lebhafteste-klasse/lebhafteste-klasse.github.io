@@ -18,6 +18,7 @@ import NewNew from "./pages/NewNew";
 import Exercises from "./pages/Exercises";
 import NewExam from "./pages/NewExam";
 import NewEvent from "./pages/NewEvent";
+import EditNew from "./pages/EditNew";
 
 const TestPage = function () {
     return <h1>Test</h1>;
@@ -111,6 +112,12 @@ function App() {
                         path="neues-event"
                         element={
                             <Wrapper component={<NewEvent />} loggedInOnly />
+                        }
+                    />
+                    <Route
+                        path="edit-news/:id"
+                        element={
+                            <Wrapper component={<EditNew />} loggedInOnly />
                         }
                     />
                 </Routes>

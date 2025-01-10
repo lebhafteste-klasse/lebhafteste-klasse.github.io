@@ -1,11 +1,16 @@
-import { useState } from "react";
-import { push, ref } from "firebase/database";
-import db, { auth } from "../db"; // Adjust the import according to your project structure
+import { onValue, ref, set } from "firebase/database";
+import React, { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import db, { auth } from "../db";
 import TrashCanIcon from "../components/TrashCanIcon";
 
-export default function NewNew() {
-    const [title, setTitle] = useState("");
+export default function EditNew() {
+    const key = useParams().id;
+    const [news, setNews] = useState({});
     const [paragraphs, setParagraphs] = useState([""]);
+    const [title, setTitle] = useState("");
+    const [error, setError] = useState(false);
 
     const handleAddParagraph = () => {
         setParagraphs([...paragraphs, ""]);
@@ -16,27 +21,37 @@ export default function NewNew() {
         newParagraphs[index] = value;
         setParagraphs(newParagraphs);
     };
+    useEffect(() => {
+        const dbRef = ref(db, `news/${key}`);
+        onValue(dbRef, (snapshot) => {
+            setNews({ id: snapshot.key, ...snapshot.val() });
+            setTitle(snapshot.val().name);
+            setParagraphs(snapshot.val().content);
+        });
+    }, [key]);
+    if (!news) return <Spinner />;
+    const editFormSubmit = (e) => {
+        e.preventDefault();
+        set(ref(db, `news/${key}`), {
+            name: title,
+            posted_at: Date.now(),
+            content: paragraphs,
+            author: auth.currentUser.email,
+        })
+            .then(() => {
+                window.location.hash = `news/${key}`;
+            })
+            .catch(() => setError(true));
+    };
 
     return (
         <div className="container">
-            <h1>Neuer News-Artikel</h1>
-            <form
-                onSubmit={(e) => {
-                    e.preventDefault();
-
-                    if (title && paragraphs.length) {
-                        push(ref(db, "news"), {
-                            name: title,
-                            content: paragraphs,
-                            posted_at: Date.now(),
-                            author: auth.currentUser.email,
-                        }).then((value) => {
-                            window.location.hash = `/news/${value.key}`;
-                        });
-                    }
-                }}
-                id="form"
-            >
+            <form onSubmit={editFormSubmit}>
+                <h1>Einen News-Artikel bearbeiten</h1>
+                <span className="text-danger">
+                    {error &&
+                        "Die Neuigkeit konnte nicht geändert werden. Hast du sie wirklich geschrieben?"}
+                </span>
                 <div className="form-group form-floating m-3">
                     <input
                         type="text"
@@ -46,7 +61,7 @@ export default function NewNew() {
                         className="form-control"
                         onChange={(e) => setTitle(e.target.value)}
                     />
-                    <label htmlFor="title">Die Kopfzeile</label>
+                    <label htmlFor="title">Die Kopfzeile (Überschrift)</label>
                 </div>
                 {paragraphs.map((paragraph, index) => (
                     <div key={index} className="form-group m-3 form-floating">
@@ -93,8 +108,8 @@ export default function NewNew() {
                 >
                     Paragraph hinzufügen
                 </button>
-                <button type="submit" className="btn btn-primary">
-                    Hinzufügen
+                <button type="submit" className="btn btn-primary m-3">
+                    Änderungen bestätigen
                 </button>
             </form>
         </div>
