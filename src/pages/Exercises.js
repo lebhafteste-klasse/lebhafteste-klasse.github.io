@@ -199,6 +199,7 @@ export default function Exercises() {
                                                     e.currentTarget.value
                                                 )
                                             }
+                                            required
                                         />
                                         <label htmlFor={`${index}-q`}>
                                             Die Frage
@@ -308,13 +309,11 @@ export default function Exercises() {
                                         type="button"
                                         className="btn btn-outline-danger m-3"
                                         onClick={() => {
-                                            const newQuestions = [...questions];
-                                            newQuestions
+                                            let newQuestions = questions;
+                                            newQuestions = newQuestions
                                                 .slice(0, index)
                                                 .concat(
-                                                    ...questions.slice(
-                                                        index + 1
-                                                    )
+                                                    questions.slice(index + 1)
                                                 );
                                             setQuestions(newQuestions);
                                         }}
@@ -422,18 +421,12 @@ export default function Exercises() {
                                         className="text-danger"
                                         style={{ cursor: "pointer" }}
                                         onClick={() => {
-                                            if (
-                                                window.confirm(
-                                                    "Sind Sie sicher, dass Sie diese Übung löschen möchten?"
+                                            remove(
+                                                ref(
+                                                    db,
+                                                    `exercises/${subject}/${exercise.id}`
                                                 )
-                                            ) {
-                                                remove(
-                                                    ref(
-                                                        db,
-                                                        `exercises/${subject}/${exercise.id}`
-                                                    )
-                                                );
-                                            }
+                                            );
                                         }}
                                     >
                                         <TrashCanIcon
