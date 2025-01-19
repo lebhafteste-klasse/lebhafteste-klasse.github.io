@@ -19,6 +19,10 @@ import Exercises from "./pages/Exercises";
 import NewExam from "./pages/NewExam";
 import NewEvent from "./pages/NewEvent";
 import EditNew from "./pages/EditNew";
+import ClassProtos from "./pages/ClassProtos";
+import ClassProto from "./pages/ClassProto";
+import NewProto from "./pages/NewProto";
+import EditProto from "./pages/EditProto";
 
 const TestPage = function () {
     return <h1>Test</h1>;
@@ -118,6 +122,26 @@ function App() {
                         path="edit-news/:id"
                         element={
                             <Wrapper component={<EditNew />} loggedInOnly />
+                        }
+                    />
+                    <Route
+                        path="proto/:subject"
+                        element={<Wrapper component={<ClassProtos />} />}
+                    />
+                    <Route
+                        path="protokoll/:subject/:id"
+                        element={<Wrapper component={<ClassProto />} />}
+                    />
+                    <Route
+                        path="neues-protokoll"
+                        element={
+                            <Wrapper component={<NewProto />} loggedInOnly />
+                        }
+                    />
+                    <Route
+                        path="edit-proto/:subject/:id"
+                        element={
+                            <Wrapper component={<EditProto />} loggedInOnly />
                         }
                     />
                 </Routes>

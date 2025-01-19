@@ -62,48 +62,57 @@ const News = () => {
 
     return (
         <div style={{ width: "80%", margin: "auto" }}>
-            <Slider {...settings}>
-                {data.map((news) => (
-                    <div key={news.id} className="card border border-1 m-2">
-                        <div className="card-body w-75">
-                            <Link to={`/news/${news.id}`}>
-                                <h3>{news.name}</h3>
-                            </Link>
-                            <p className="fs-6">
-                                {formatDate(new Date(news.posted_at))}
-                            </p>
-                            {auth.currentUser &&
-                                auth.currentUser.email === news.author && (
-                                    <div>
-                                        <Link to={`/edit-news/${news.id}`}>
-                                            <PencilIcon
-                                                strokeWidth="2"
-                                                fill="orange"
+            {data.length ? (
+                <Slider {...settings}>
+                    {data.map((news) => (
+                        <div key={news.id} className="card border border-1 m-2">
+                            <div className="card-body w-75">
+                                <Link to={`/news/${news.id}`}>
+                                    <h3>{news.name}</h3>
+                                </Link>
+                                <p className="fs-6">
+                                    {formatDate(new Date(news.posted_at))}
+                                </p>
+                                {auth.currentUser &&
+                                    auth.currentUser.email === news.author && (
+                                        <div>
+                                            <Link to={`/edit-news/${news.id}`}>
+                                                <PencilIcon
+                                                    strokeWidth="2"
+                                                    fill="orange"
+                                                    width="25"
+                                                    height="25"
+                                                    className="mx-2"
+                                                    aria-label="Witz ändern"
+                                                    style={{
+                                                        cursor: "pointer",
+                                                    }}
+                                                />
+                                            </Link>
+                                            <TrashCanIcon
+                                                fill="red"
                                                 width="25"
                                                 height="25"
-                                                className="mx-2"
-                                                aria-label="Witz ändern"
+                                                aria-label="Witz löschen"
                                                 style={{ cursor: "pointer" }}
+                                                onClick={() =>
+                                                    remove(
+                                                        ref(
+                                                            db,
+                                                            `news/${news.id}`
+                                                        )
+                                                    )
+                                                }
                                             />
-                                        </Link>
-                                        <TrashCanIcon
-                                            fill="red"
-                                            width="25"
-                                            height="25"
-                                            aria-label="Witz löschen"
-                                            style={{ cursor: "pointer" }}
-                                            onClick={() =>
-                                                remove(
-                                                    ref(db, `news/${news.id}`)
-                                                )
-                                            }
-                                        />
-                                    </div>
-                                )}
+                                        </div>
+                                    )}
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </Slider>
+                    ))}
+                </Slider>
+            ) : (
+                "Keine News vorhanden"
+            )}
         </div>
     );
 };
