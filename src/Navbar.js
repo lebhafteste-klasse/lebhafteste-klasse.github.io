@@ -121,6 +121,11 @@ export default function Navbar() {
                             Ein Event ankündigen
                         </Link>
                     </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to={`/protokolle`}>
+                            Unterrichtsprotokolle
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </nav>

@@ -9,10 +9,11 @@ import {
     remove,
     push,
 } from "firebase/database";
+import PencilIcon from "../components/PencilIcon";
 import db, { auth } from "../db";
 import "../styles/Exercises.css";
 import { Accordion, Spinner } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { beginWithCapital } from "../utils";
 import TrashCanIcon from "../components/TrashCanIcon";
 import ExerciseEditForm from "../components/ExerciseEditForm";
@@ -416,7 +417,23 @@ export default function Exercises() {
                             ) && (
                                 <div>
                                     <hr />
-
+                                    {exercise.type &&
+                                        exercise.type === "quiz" && (
+                                            <Link
+                                                to={`/edit-quiz/${subject}/${exercise.id}`}
+                                            >
+                                                <PencilIcon
+                                                    strokeWidth="2"
+                                                    fill="orange"
+                                                    width="25"
+                                                    height="25"
+                                                    className="mx-2"
+                                                    style={{
+                                                        cursor: "pointer",
+                                                    }}
+                                                />
+                                            </Link>
+                                        )}
                                     <span
                                         className="text-danger"
                                         style={{ cursor: "pointer" }}
