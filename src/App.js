@@ -25,6 +25,8 @@ import NewProto from "./pages/NewProto";
 import EditProto from "./pages/EditProto";
 import EditQuiz from "./pages/EditQuiz";
 import ProtosList from "./pages/ProtosList";
+import EditForumPost from "./pages/EditForumPost";
+import EditAnswer from "./pages/EditAnswer";
 
 const TestPage = function () {
     return <h1>Test</h1>;
@@ -155,6 +157,21 @@ function App() {
                     <Route
                         path="protokolle"
                         element={<Wrapper component={<ProtosList />} />}
+                    />
+                    <Route
+                        path="edit-post/:subject/:key"
+                        element={
+                            <Wrapper
+                                component={<EditForumPost />}
+                                loggedInOnly
+                            />
+                        }
+                    />
+                    <Route
+                        path="edit-postantwort/:subject/:key/:akey"
+                        element={
+                            <Wrapper component={<EditAnswer />} loggedInOnly />
+                        }
                     />
                 </Routes>
             </HashRouter>

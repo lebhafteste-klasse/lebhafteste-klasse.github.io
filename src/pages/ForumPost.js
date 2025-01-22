@@ -1,9 +1,11 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ref, onValue, push } from "firebase/database";
+import { ref, onValue, push, remove } from "firebase/database";
 import db, { auth } from "../db";
 import { formatDate } from "../utils";
 import Spinner from "react-bootstrap/Spinner";
+import PencilIcon from "../components/PencilIcon";
+import TrashCanIcon from "../components/TrashCanIcon";
 
 export default function ForumPost() {
     const [post, setPost] = useState(null);
@@ -18,8 +20,11 @@ export default function ForumPost() {
         });
         const answersRef = ref(db, `forum/${subject}/${key}/answers`);
         onValue(answersRef, (snapshot) => {
-            const data = snapshot.val();
-            setAnswers(data);
+            let dataGot = [];
+            snapshot.forEach((childSnapshot) => {
+                dataGot.push({ id: childSnapshot.key, ...childSnapshot.val() });
+            });
+            setAnswers(dataGot);
         });
     }, [subject, key]);
     if (!post) {
@@ -48,18 +53,67 @@ export default function ForumPost() {
             </small>
             <br />
             <div>{post.content}</div>
+            {auth.currentUser && post.author === auth.currentUser.email && (
+                <div>
+                    <Link to={`/edit-post/${subject}/${key}`}>
+                        <PencilIcon fill="orange" width="25" height="25" />
+                    </Link>
+                    <TrashCanIcon
+                        fill="red"
+                        width="25"
+                        height="25"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                            remove(ref(db, `forum/${subject}/${key}`)).then(
+                                () => {
+                                    window.history.back();
+                                }
+                            );
+                        }}
+                    />
+                </div>
+            )}
             <div style={{ marginTop: "10%" }} />
-            <h4>Antworten:</h4>
+
+            <h4>Antworten zu diesem Post:</h4>
             <div>
-                {answers
-                    ? Object.values(answers).map((val, index) => {
+                {answers.length
+                    ? answers.map((val, index) => {
                           return (
                               <div key={index} className="mb-4">
                                   {val.content} <br />
                                   <small>
                                       {formatDate(new Date(val.posted_at))}
-                                      <br />
                                   </small>
+                                  <br />
+                                  {auth.currentUser &&
+                                      auth.currentUser.email === val.author && (
+                                          <>
+                                              <Link
+                                                  to={`/edit-postantwort/${subject}/${key}/${val.id}`}
+                                              >
+                                                  <PencilIcon
+                                                      fill="orange"
+                                                      width="25"
+                                                      height="25"
+                                                  />
+                                              </Link>
+                                              <TrashCanIcon
+                                                  fill="red"
+                                                  width="25"
+                                                  height="25"
+                                                  style={{ cursor: "pointer" }}
+                                                  onClick={() => {
+                                                      remove(
+                                                          ref(
+                                                              db,
+                                                              `forum/${subject}/${key}/${val.id}`
+                                                          )
+                                                      );
+                                                  }}
+                                              />
+                                          </>
+                                      )}
                               </div>
                           );
                       })
@@ -87,6 +141,8 @@ export default function ForumPost() {
                 ) : (
                     "Du musst angemeldet sein, um eine Antwort schreiben zu können."
                 )}
+                <br />
+                <br />
             </div>
         </div>
     );
