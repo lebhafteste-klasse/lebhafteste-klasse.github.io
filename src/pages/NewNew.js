@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { push, ref } from "firebase/database";
 import db, { auth } from "../db"; // Adjust the import according to your project structure
-import TrashCanIcon from "../components/TrashCanIcon";
+import DeleteIcon from "../components/DeleteIcon";
 
 export default function NewNew() {
     const [title, setTitle] = useState("");
@@ -64,7 +64,6 @@ export default function NewNew() {
                         </label>
                         {index !== 0 && (
                             <span
-                                style={{ cursor: "pointer" }}
                                 onClick={() => {
                                     setParagraphs(
                                         paragraphs
@@ -74,14 +73,9 @@ export default function NewNew() {
                                             )
                                     );
                                 }}
-                                className="text-danger"
+                                className="text-danger cursor-pointer"
                             >
-                                <TrashCanIcon
-                                    fill="red"
-                                    with="25"
-                                    height="25"
-                                />{" "}
-                                Paragraph entfernen
+                                <DeleteIcon /> Paragraph entfernen
                             </span>
                         )}
                     </div>

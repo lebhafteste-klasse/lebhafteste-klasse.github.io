@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import db, { auth } from "../db";
-import TrashCanIcon from "../components/TrashCanIcon";
 import { beginWithCapital } from "../utils";
+import DeleteIcon from "../components/DeleteIcon";
 
 export default function EditProto() {
     const [proto, setProto] = useState(null);
@@ -71,7 +71,6 @@ export default function EditProto() {
                         </label>
                         {index !== 0 && (
                             <span
-                                style={{ cursor: "pointer" }}
                                 onClick={() => {
                                     setParagraphs(
                                         paragraphs
@@ -81,14 +80,9 @@ export default function EditProto() {
                                             )
                                     );
                                 }}
-                                className="text-danger"
+                                className="cursor-pointer text-danger"
                             >
-                                <TrashCanIcon
-                                    fill="red"
-                                    with="25"
-                                    height="25"
-                                />{" "}
-                                Paragraph entfernen
+                                <DeleteIcon /> Paragraph entfernen
                             </span>
                         )}
                     </div>

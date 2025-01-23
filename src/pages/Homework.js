@@ -93,9 +93,8 @@ export default function Homework() {
                         className="btn"
                     >
                         <i
-                            className="text-success border rounded-circle d-inline-block"
+                            className="text-success border rounded-circle d-inline-block cursor-pointer"
                             style={{
-                                cursor: "pointer",
                                 width: "40px",
                                 height: "40px",
                                 borderColor: "lime !important",

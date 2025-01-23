@@ -5,8 +5,8 @@ import db, { auth } from "../db";
 import { Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { beginWithCapital, formatDate } from "../utils";
-import PencilIcon from "../components/PencilIcon";
-import TrashCanIcon from "../components/TrashCanIcon";
+import DeleteIcon from "../components/DeleteIcon";
+import EditLink from "../components/EditLink";
 
 export default function ClassProtos() {
     const subject = useParams().subject;
@@ -29,9 +29,8 @@ export default function ClassProtos() {
                 {auth.currentUser ? (
                     <Link className="btn" to={"/neues-protokoll"}>
                         <i
-                            className="text-success border rounded-circle d-inline-block"
+                            className="text-success cursor-pointer border rounded-circle d-inline-block"
                             style={{
-                                cursor: "pointer",
                                 width: "40px",
                                 height: "40px",
                                 borderColor: "lime !important",
@@ -65,18 +64,11 @@ export default function ClassProtos() {
                               auth.currentUser.email === proto.author && (
                                   <>
                                       <br />
-                                      <Link
+                                      <EditLink
                                           to={`/edit-proto/${subject}/${proto.id}`}
                                           className="m-3"
-                                      >
-                                          <PencilIcon
-                                              width="25"
-                                              height="25"
-                                              fill="orange"
-                                          />
-                                      </Link>
-
-                                      <TrashCanIcon
+                                      />
+                                      <DeleteIcon
                                           onClick={() => {
                                               remove(
                                                   ref(
@@ -85,10 +77,7 @@ export default function ClassProtos() {
                                                   )
                                               );
                                           }}
-                                          fill="red"
-                                          width="25"
-                                          height="25"
-                                          style={{ cursor: "pointer" }}
+                                          className="m-3"
                                       />
                                   </>
                               )}

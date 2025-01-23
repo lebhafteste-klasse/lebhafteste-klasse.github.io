@@ -27,3 +27,7 @@ a:hover {
 a .no-decoration {
     text-decoration: none;
 }
+
+.cursor-pointer {
+    cursor: pointer !important;
+}

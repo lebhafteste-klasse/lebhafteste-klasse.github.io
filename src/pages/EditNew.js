@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import db, { auth } from "../db";
-import TrashCanIcon from "../components/TrashCanIcon";
+import DeleteIcon from "../components/DeleteIcon";
 
 export default function EditNew() {
     const key = useParams().id;
@@ -79,7 +79,6 @@ export default function EditNew() {
                         </label>
                         {index !== 0 && (
                             <span
-                                style={{ cursor: "pointer" }}
                                 onClick={() => {
                                     setParagraphs(
                                         paragraphs
@@ -89,14 +88,9 @@ export default function EditNew() {
                                             )
                                     );
                                 }}
-                                className="text-danger"
+                                className="text-danger cursor-pointer"
                             >
-                                <TrashCanIcon
-                                    fill="red"
-                                    with="25"
-                                    height="25"
-                                />{" "}
-                                Paragraph entfernen
+                                <DeleteIcon /> Paragraph entfernen
                             </span>
                         )}
                     </div>

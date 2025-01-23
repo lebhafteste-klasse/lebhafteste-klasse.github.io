@@ -44,9 +44,8 @@ export default function CreateJoke() {
                 className="btn"
             >
                 <i
-                    className="text-success border rounded-circle d-inline-block"
+                    className="text-success cursor-pointer border rounded-circle d-inline-block"
                     style={{
-                        cursor: "pointer",
                         width: "40px",
                         height: "40px",
                         borderColor: "lime !important",

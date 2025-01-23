@@ -1,11 +1,11 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ref, onValue, push, remove } from "firebase/database";
 import db, { auth } from "../db";
 import { formatDate } from "../utils";
 import Spinner from "react-bootstrap/Spinner";
-import PencilIcon from "../components/PencilIcon";
-import TrashCanIcon from "../components/TrashCanIcon";
+import DeleteIcon from "../components/DeleteIcon";
+import EditLink from "../components/EditLink";
 
 export default function ForumPost() {
     const [post, setPost] = useState(null);
@@ -55,14 +55,8 @@ export default function ForumPost() {
             <div>{post.content}</div>
             {auth.currentUser && post.author === auth.currentUser.email && (
                 <div>
-                    <Link to={`/edit-post/${subject}/${key}`}>
-                        <PencilIcon fill="orange" width="25" height="25" />
-                    </Link>
-                    <TrashCanIcon
-                        fill="red"
-                        width="25"
-                        height="25"
-                        style={{ cursor: "pointer" }}
+                    <EditLink to={`/edit-post/${subject}/${key}`} />
+                    <DeleteIcon
                         onClick={() => {
                             remove(ref(db, `forum/${subject}/${key}`)).then(
                                 () => {
@@ -89,20 +83,10 @@ export default function ForumPost() {
                                   {auth.currentUser &&
                                       auth.currentUser.email === val.author && (
                                           <>
-                                              <Link
-                                                  to={`/edit-postantwort/${subject}/${key}/${val.id}`}
-                                              >
-                                                  <PencilIcon
-                                                      fill="orange"
-                                                      width="25"
-                                                      height="25"
-                                                  />
-                                              </Link>
-                                              <TrashCanIcon
-                                                  fill="red"
-                                                  width="25"
-                                                  height="25"
-                                                  style={{ cursor: "pointer" }}
+                                              <EditLink
+                                                  to={`/edit-answer/${subject}/${key}/${val.id}`}
+                                              />
+                                              <DeleteIcon
                                                   onClick={() => {
                                                       remove(
                                                           ref(

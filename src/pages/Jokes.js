@@ -11,7 +11,7 @@ import {
 import CreateJoke from "../components/CreateJoke";
 import { Spinner } from "react-bootstrap";
 import PencilIcon from "../components/PencilIcon";
-import TrashCanIcon from "../components/TrashCanIcon";
+import DeleteIcon from "../components/DeleteIcon";
 function Joke({ joke, index }) {
     const [editFormVisible, setEditFormVisible] = useState(false);
     const editFormSubmit = (e) => {
@@ -64,17 +64,12 @@ function Joke({ joke, index }) {
                             fill="orange"
                             width="25"
                             height="25"
-                            className="mx-2"
+                            className="mx-2 cursor-pointer"
                             aria-label="Witz ändern"
-                            style={{ cursor: "pointer" }}
                             onClick={() => setEditFormVisible(!editFormVisible)}
                         />
-                        <TrashCanIcon
-                            fill="red"
-                            width="25"
-                            height="25"
+                        <DeleteIcon
                             aria-label="Witz löschen"
-                            style={{ cursor: "pointer" }}
                             onClick={deleteFormSubmit}
                         />
                     </>

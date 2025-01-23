@@ -9,8 +9,8 @@ import Slider from "react-slick";
 import "../styles/custom-arrows.css";
 import { formatDate } from "../utils";
 import { PrevArrow, NextArrow } from "../components/Arrows";
-import PencilIcon from "../components/PencilIcon";
-import TrashCanIcon from "../components/TrashCanIcon";
+import DeleteIcon from "../components/DeleteIcon";
+import EditLink from "../components/EditLink";
 const News = () => {
     const [data, setData] = useState([]);
 
@@ -76,25 +76,12 @@ const News = () => {
                                 {auth.currentUser &&
                                     auth.currentUser.email === news.author && (
                                         <div>
-                                            <Link to={`/edit-news/${news.id}`}>
-                                                <PencilIcon
-                                                    strokeWidth="2"
-                                                    fill="orange"
-                                                    width="25"
-                                                    height="25"
-                                                    className="mx-2"
-                                                    aria-label="Witz ändern"
-                                                    style={{
-                                                        cursor: "pointer",
-                                                    }}
-                                                />
-                                            </Link>
-                                            <TrashCanIcon
-                                                fill="red"
-                                                width="25"
-                                                height="25"
+                                            <EditLink
+                                                className="mx-2 cursor-pointer"
+                                                to={`/edit-news/${news.id}`}
+                                            />
+                                            <DeleteIcon
                                                 aria-label="Witz löschen"
-                                                style={{ cursor: "pointer" }}
                                                 onClick={() =>
                                                     remove(
                                                         ref(
