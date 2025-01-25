@@ -27,6 +27,8 @@ import EditQuiz from "./pages/EditQuiz";
 import ProtosList from "./pages/ProtosList";
 import EditForumPost from "./pages/EditForumPost";
 import EditAnswer from "./pages/EditAnswer";
+import ArtisQFun from "./pages/ArtisQFun";
+import NewRiddle from "./pages/NewRiddle";
 
 const TestPage = function () {
     return <h1>Test</h1>;
@@ -172,6 +174,14 @@ function App() {
                         element={
                             <Wrapper component={<EditAnswer />} loggedInOnly />
                         }
+                    />
+                    <Route
+                        path="rätselspaßmitarti"
+                        element={<Wrapper component={<ArtisQFun />} />}
+                    />
+                    <Route
+                        path="rätselspaßmitarti/new-riddle"
+                        element={<Wrapper component={<NewRiddle />} />}
                     />
                 </Routes>
             </HashRouter>
