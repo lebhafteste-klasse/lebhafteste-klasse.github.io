@@ -62,7 +62,7 @@ const News = () => {
 
     return (
         <div style={{ width: "80%", margin: "auto" }}>
-            {data.length ? (
+            {data.length > 2 ? (
                 <Slider {...settings}>
                     {data.map((news) => (
                         <div key={news.id} className="card border border-1 m-2">
@@ -97,6 +97,36 @@ const News = () => {
                         </div>
                     ))}
                 </Slider>
+            ) : data.length > 0 ? (
+                data.map((news) => (
+                    <div key={news.id} className="card border border-1 m-2">
+                        <div className="card-body w-75">
+                            <Link to={`/news/${news.id}`}>
+                                <h3>{news.name}</h3>
+                            </Link>
+                            <p className="fs-6">
+                                {formatDate(new Date(news.posted_at))}
+                            </p>
+                            {auth.currentUser &&
+                                auth.currentUser.email === news.author && (
+                                    <div>
+                                        <EditLink
+                                            className="mx-2 cursor-pointer"
+                                            to={`/edit-news/${news.id}`}
+                                        />
+                                        <DeleteIcon
+                                            aria-label="Witz löschen"
+                                            onClick={() =>
+                                                remove(
+                                                    ref(db, `news/${news.id}`)
+                                                )
+                                            }
+                                        />
+                                    </div>
+                                )}
+                        </div>
+                    </div>
+                ))
             ) : (
                 "Keine News vorhanden"
             )}
