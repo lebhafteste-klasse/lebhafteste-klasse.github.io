@@ -87,7 +87,7 @@ function Jokes() {
             snapshot.forEach((child) => {
                 jokesList.push({ id: child.key, ...child.val() });
             });
-            setJokes(jokesList);
+            setJokes(jokesList.reverse());
         });
     }, []);
 
