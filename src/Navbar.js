@@ -22,7 +22,7 @@ export default function Navbar() {
             className={`navbar border-bottom border-1 border-dark mb-2 ${theme}`}
         >
             <a className="navbar-brand px-2" href="#/">
-                6D
+                7D
             </a>
             <span>
                 {!authenticated ? (

@@ -16,7 +16,7 @@ const Index = function () {
             >
                 Die lebhafteste Klasse am Stifts.
                 <div className="text-center">
-                    <b>6D</b>
+                    <b>7D</b>
                 </div>
             </div>
             <div data-aos="fade-right" className="container">

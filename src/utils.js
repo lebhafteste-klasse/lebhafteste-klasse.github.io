@@ -26,7 +26,7 @@ export const formatDate = (date, withDate = true, withTime = true) => {
         } `;
     }
     if (withDate) {
-        formatted = `${formatted}${!withTime ? "A" : "a"}m ${date.getDate()}.${
+        formatted += `${!withTime ? "A" : "a"}m ${date.getDate()}.${
             date.getMonth() + 1
         }.${date.getFullYear()}`;
     }
