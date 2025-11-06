@@ -10,7 +10,7 @@ export const subjects = [
     { id: "englisch", name: "Englisch", color: "green" },
     { id: "geschichte", name: "Gesch.", color: "yellow" },
     { id: "bio", name: "Biologie", color: "lime" },
-    { id: "physik", name: "BNT-T", color: "cyan" },
+    { id: "physik", name: "Physik", color: "cyan" },
     // { id: 'chemie', name: 'Chemie' },
     // { id: 'informatik', name: 'Informatik' },
     { id: "musik", name: "Musik", color: "skyblue" },
@@ -18,6 +18,7 @@ export const subjects = [
     { id: "NWT", name: "NWT", color: "black" },
     { id: "ethik", name: "Eth/Reli", color: "purple" },
     { id: "geographie", name: "Geo", color: "brown" },
+{id: "spanish", name: "Spanish", color: "cyan"}
 ];
 export default function SubjectForums() {
     return (
